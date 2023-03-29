@@ -7,10 +7,9 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class UpdateInfoRequest {
+public class UpdatePasswordRequest {
 
-    private Long id;
-    private String name;
-    private String phone;
+    private String oldPassword;
+    private String newPassword;
 
 }

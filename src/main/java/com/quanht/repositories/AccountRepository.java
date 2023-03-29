@@ -45,5 +45,6 @@ public interface AccountRepository  extends JpaRepository<Account, Long> {
                         @Param("addressValue") String address,
                         @Param("cityCodeValue") Integer cityCode,
                         @Param("updateAtValue") LocalDateTime updateAt);
+    
 
 }

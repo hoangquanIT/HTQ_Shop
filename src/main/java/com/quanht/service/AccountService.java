@@ -8,10 +8,7 @@ import com.quanht.exception.BadRequestException;
 import com.quanht.exception.NotFoundException;
 import com.quanht.repositories.AccountRepository;
 import com.quanht.repositories.RoleRepository;
-import com.quanht.request.CustomerRequest;
-import com.quanht.request.CustomerUpdateRequest;
-import com.quanht.request.EmployeeRequest;
-import com.quanht.request.EmployeeUpdateRequest;
+import com.quanht.request.*;
 import com.quanht.security.JwtUtils;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
@@ -79,6 +77,43 @@ public class AccountService implements UserDetailsService {
         });
     }
 
+    @Transactional
+    public Account updateInfo(UpdateInfoRequest updateInfo){
+        Account account = accountRepository.findById(updateInfo.getId()).orElseThrow(() -> {
+            throw new NotFoundException("Không tìm thấy tài khoản");
+        });
+
+        Optional<Account> oldAccount = accountRepository.findByPhone(updateInfo.getPhone());
+        if (oldAccount.isPresent()){
+            if (oldAccount.get().getId() != updateInfo.getId()){
+                throw new BadRequestException("Số điện thoại đã tồn tại đã tồn tại");
+            }
+        }
+
+
+        account.setName(updateInfo.getName());
+        account.setPhone(updateInfo.getPhone());
+
+        return account;
+    }
+
+    @Transactional
+    public Account updatePassword(UpdatePasswordRequest updatePass, HttpServletRequest request){
+        Account account = getDetail(request);
+
+        String oldPassword = updatePass.getOldPassword();
+        String newPassword = updatePass.getNewPassword();
+
+        if (passwordEncoder.matches(oldPassword, account.getPassword())){
+            account.setPassword(passwordEncoder.encode(newPassword));
+            return account;
+        } else {
+            throw new BadRequestException("Mật khẩu cũ không chính xác");
+        }
+
+    }
+
+    @Transactional
     public Account createEmployee(EmployeeRequest employeeRequest){
         if (accountRepository.findByEmail(employeeRequest.getEmail()).isPresent()){
             throw new BadRequestException("Email đã tồn tại");
@@ -110,6 +145,7 @@ public class AccountService implements UserDetailsService {
         });
     }
 
+    @Transactional
     public void updateEmployee(EmployeeUpdateRequest updateEmployee){
         Optional<Account> oldAccount = accountRepository.findByPhone(updateEmployee.getPhone());
         if (oldAccount.isPresent()){
@@ -121,11 +157,12 @@ public class AccountService implements UserDetailsService {
         accountRepository.updateEmployee(updateEmployee.getId(), updateEmployee.getName(), updateEmployee.getPhone(), LocalDateTime.now());
     }
 
+    @Transactional
     public void deleteEmployee(Long id){
         accountRepository.deleteById(id);
     }
 
-
+    @Transactional
     public Account createCustomer(CustomerRequest customerRequest){
         if (accountRepository.findByEmail(customerRequest.getEmail()).isPresent()){
             throw new BadRequestException("Email đã tồn tại");
@@ -153,6 +190,7 @@ public class AccountService implements UserDetailsService {
         return accountRepository.save(account);
     }
 
+    @Transactional
     public void updateCustomer(CustomerUpdateRequest updateCustomer){
         Optional<Account> oldAccount = accountRepository.findByPhone(updateCustomer.getPhone());
         if (oldAccount.isPresent()){

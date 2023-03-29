@@ -24,17 +24,17 @@ public class Variant extends BaseEntity{
     @Column(name = "sku", nullable = false, unique = true)
     private String sku;
 
-    @Column(name = "size")
+    @Column(name = "size", nullable = false)
     private String size;
 
-    @Column(name = "color")
+    @Column(name = "color", nullable = false)
     private String color;
 
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     @Min(value = 0)
     private Double price;
 
-    @Column(name = "quantity")
+    @Column(name = "quantity", nullable = false)
     @Min(value = 0)
     private Integer quantity;
 

@@ -20,6 +20,15 @@
     <!-- Custom styles for this template-->
     <link href="/admin/css/sb-admin-2.min.css" rel="stylesheet">
 
+    <style>
+        .error{
+            width: 100%;
+            color: red;
+            font-size: 15px;
+            padding-top: 10px;
+        }
+    </style>
+
 </head>
 
 <body id="page-top">
@@ -55,7 +64,8 @@
                             <div class="col-5 mx-4 my-2">
                                 <div class="form-group input-row pt-2">
                                     <label for="info-name">Họ và tên</label>
-                                    <input type="text" class="form-control" id="info-name" placeholder="Enter name">
+                                    <input type="text" class="form-control" id="info-name" name="info-name"
+                                           placeholder="Enter name">
                                 </div>
                             </div>
                             <div class="col-5 mx-4 my-2">
@@ -68,7 +78,8 @@
                             <div class="col-5 mx-4 my-2">
                                 <div class="form-group input-row pt-2">
                                     <label for="info-phone">Số điện thoại</label>
-                                    <input type="text" class="form-control" id="info-phone" placeholder="Enter phone">
+                                    <input type="text" class="form-control" id="info-phone" name="info-phone"
+                                           placeholder="Enter phone">
                                 </div>
                             </div>
                             <div class="col-5 mx-4 my-2">
@@ -86,7 +97,7 @@
                                 <a href="/admin/dashboard" class="btn btn-secondary btn-back">
                                     Quay lại
                                 </a>
-                                <button class="btn btn-primary" id="btn-update">Cập nhật</button>
+                                <button type="button" class="btn btn-primary" id="btn-update">Cập nhật</button>
                             </div>
                         </form>
                     </div>
@@ -99,33 +110,34 @@
         <!-- End of Main Content -->
 
         <!-- Modal đổi mật khẩu-->
-        <div class="modal fade" id="modal-change-password" data-bs-backdrop="static" data-bs-keyboard="false"
-             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade" id="modal-change-password" style="display: none;" aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content">
+                <form class="modal-content" id="change-pass-form">
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel">Đổi mật khẩu</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
                     </div>
                     <div class="modal-body" id="change-password">
                         <div class="mb-3 input-row">
                             <label for="old-password" class="col-form-label">Mật khẩu cũ</label>
-                            <input type="password" id="old-password" class="form-control"/>
+                            <input type="password" id="old-password" name="old-password" class="form-control"/>
                         </div>
                         <div class="mb-3 input-row">
                             <label for="new-password" class="col-form-label">Mật khẩu mới</label>
-                            <input type="password" id="new-password" class="form-control"/>
+                            <input type="password" id="new-password" name="new-password" class="form-control"/>
                         </div>
                         <div class="mb-3 input-row">
                             <label for="re-password" class="col-form-label">Xác nhận mật khẩu mới</label>
-                            <input type="password" id="re-password" class="form-control"/>
+                            <input type="password" id="re-password" name="re-password" class="form-control"/>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                         <button type="button" class="btn btn-primary" id="btn-change-password">Xác nhận</button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
 
@@ -207,7 +219,7 @@
 
 <script src="/admin/js/custom/toastr-config.js"></script>
 <script src="/admin/js/custom/detail.js"></script>
-<script src="/admin/js/custom/validate.js"></script>
+<script src="/admin/js/custom/validate-info.js"></script>
 
 </body>
 

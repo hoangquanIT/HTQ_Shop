@@ -3,6 +3,7 @@ package com.quanht.controller.admin;
 import com.quanht.request.EmployeeRequest;
 import com.quanht.request.EmployeeUpdateRequest;
 import com.quanht.request.UpdateInfoRequest;
+import com.quanht.request.UpdatePasswordRequest;
 import com.quanht.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -55,9 +56,14 @@ public class EmployeeController {
         return ResponseEntity.ok(accountService.getDetail(request));
     }
 
-    @PostMapping("/detail")
+    @PutMapping("/detail")
     public ResponseEntity<?> updateEmployeeDetails(@RequestBody UpdateInfoRequest request){
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(accountService.updateInfo(request));
+    }
+
+    @PutMapping("/detail/password")
+    public ResponseEntity<?> updatePassword(@RequestBody UpdatePasswordRequest updatePasswordRequest, HttpServletRequest request){
+        return ResponseEntity.ok(accountService.updatePassword(updatePasswordRequest, request));
     }
 
 }

@@ -3,6 +3,7 @@ package com.quanht.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @NoArgsConstructor
@@ -40,5 +41,10 @@ public class Product extends BaseEntity{
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories;
 
+    @PrePersist
+    void prePersist(){
+        this.setCreatedAt(LocalDateTime.now());
+        this.setUpdatedAt(LocalDateTime.now());
+    }
 
 }

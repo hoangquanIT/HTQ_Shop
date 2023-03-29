@@ -6,6 +6,7 @@ import com.quanht.repositories.CategoryRepository;
 import com.quanht.request.CategoryRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,6 +26,7 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
+    @Transactional
     public Category createCategory(CategoryRequest categoryRequest){
         if(categoryRepository.findByNameContainingIgnoreCase(categoryRequest.getName()).isPresent()){
             throw new BadRequestException("Nhóm sản phẩm đã tồn tại");
@@ -36,6 +38,7 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
+    @Transactional
     public void updateCategory(Long id, CategoryRequest categoryRequest){
         Optional<Category> category = categoryRepository.findByNameContainingIgnoreCase(categoryRequest.getName());
         if(category.isPresent()){
@@ -46,6 +49,7 @@ public class CategoryService {
         categoryRepository.updateCategory(id, categoryRequest.getName(), categoryRequest.getDescription(), LocalDateTime.now());
     }
 
+    @Transactional
     public void deleteCategory(Long id){
         categoryRepository.deleteById(id);
     }
