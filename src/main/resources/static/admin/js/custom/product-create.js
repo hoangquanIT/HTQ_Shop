@@ -113,7 +113,7 @@ function createProduct(){
             formData.delete("file[]")
             formData.delete("product")
             window.location.href = "/admin/products";
-            toastr.success("Add Category successfully");
+            toastr.success("Add Product successfully");
         },
         error: function(e){
             console.log(e);

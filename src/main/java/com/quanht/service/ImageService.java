@@ -1,16 +1,21 @@
 package com.quanht.service;
 
 import com.quanht.entities.Image;
+import com.quanht.entities.Product;
 import com.quanht.exception.BadRequestException;
+import com.quanht.exception.NotFoundException;
 import com.quanht.repositories.ImageRepository;
+import com.quanht.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -18,11 +23,14 @@ public class ImageService {
 
     private ImageRepository imageRepository;
 
-    private Path rootPath = Paths.get("images");
+    private ProductRepository productRepository;
+
+    private Path rootPath = Paths.get("src/main/resources/static/images");
 
     @Autowired
-    public ImageService(ImageRepository imageRepository) {
+    public ImageService(ImageRepository imageRepository, ProductRepository productRepository) {
         this.imageRepository = imageRepository;
+        this.productRepository = productRepository;
         createFolder(rootPath.toString());
     }
 
@@ -33,6 +41,7 @@ public class ImageService {
         }
     }
 
+    @Transactional
     public Image saveToDB(Image image){
         return imageRepository.save(image);
     }
@@ -55,7 +64,7 @@ public class ImageService {
             stream.write(file.getBytes());
             stream.close();
 
-            return url;
+            return "/images/" + fileId + getExtensionFile(fileName);
         } catch (Exception e){
             throw new BadRequestException("Không thể tải file");
         }
@@ -95,5 +104,42 @@ public class ImageService {
     public boolean checkFileExtension(String fileExtension){
         List<String> extensions = new ArrayList<>(List.of(".png", ".jpeg", ".jpg"));
         return extensions.contains(fileExtension);
+    }
+
+    @Transactional
+    public List<Image> uploadImagesForProduct(Long id, MultipartFile[] files){
+        Product product = productRepository.findById(id).orElseThrow(() -> {
+            throw new NotFoundException("Không tồn tại sản phẩm có id = " + id);
+        });
+        List<Image> list = new ArrayList<>();
+        if (files.length > 0) {
+            Arrays.stream(files).forEach(img -> {
+                String pathFile = uploadFile(img);
+                Image image = Image.builder()
+                        .url(pathFile)
+                        .product(product)
+                        .build();
+                imageRepository.save(image);
+                list.add(image);
+            });
+        }
+        return list;
+    }
+
+    @Transactional
+    public void deleteImage(Long id){
+        Image image = imageRepository.findById(id).orElseThrow(() -> {
+            throw new NotFoundException("Không tìm thấy ảnh tương ứng");
+        });
+
+        String url = image.getUrl();
+        Path file = Paths.get(rootPath + url);
+
+        try {
+            file.toFile().delete();
+            imageRepository.delete(image);
+        } catch (Exception e) {
+            throw new BadRequestException("Đã có lỗi xảy ra");
+        }
     }
 }

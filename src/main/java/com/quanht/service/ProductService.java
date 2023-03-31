@@ -6,12 +6,15 @@ import com.quanht.entities.Category;
 import com.quanht.entities.Image;
 import com.quanht.entities.Product;
 import com.quanht.exception.BadRequestException;
+import com.quanht.exception.NotFoundException;
 import com.quanht.repositories.CategoryRepository;
 import com.quanht.repositories.ProductRepository;
 import com.quanht.repositories.VariantRepository;
 import com.quanht.request.ProductRequest;
+import com.quanht.request.UpdateProductRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
@@ -36,6 +39,17 @@ public class ProductService {
         this.imageService = imageService;
     }
 
+    public List<Product> getProducts() {
+        return  productRepository.findAll();
+    }
+
+    public Product getProductById(Long id){
+        return productRepository.findById(id).orElseThrow(() -> {
+            throw new NotFoundException("Không tìm thấy sản phẩm");
+        });
+    }
+
+    @Transactional
     public Product createProduct(MultipartFile[] files, String product){
         try {
             ObjectMapper objectMapper = new ObjectMapper();
@@ -43,7 +57,6 @@ public class ProductService {
             List<Category> categories = new ArrayList<>();
 
             if (productRepository.findByName(request.getName()).isPresent()){
-                System.out.println(request.getName());
                 throw new BadRequestException("Tên sản phẩm đã tồn tại");
             }
 
@@ -77,6 +90,7 @@ public class ProductService {
         }
     }
 
+    @Transactional
     public void saveMultipleImage(MultipartFile[] files, Product product){
         if(files.length > 0) {
             Arrays.stream(files).forEach(img -> {
@@ -89,6 +103,36 @@ public class ProductService {
                 imageService.saveToDB(image);
             });
         }
+    }
+
+    @Transactional
+    public Product updateProduct(Long id, UpdateProductRequest request){
+        Optional<Product> checkProduct = productRepository.findByName(request.getName());
+        if (checkProduct.isPresent()){
+            if (checkProduct.get().getId() != id) {
+                throw new BadRequestException("Tên sản phẩm đã tồn tại");
+            }
+        }
+        Product product = getProductById(id);
+        product.setName(request.getName());
+        product.setContent(request.getContent());
+        product.setDescription(request.getDescription());
+
+        if (request.getCategoryIds().size() > 0){
+            List<Category> categories = new ArrayList<>();
+            request.getCategoryIds()
+                    .forEach(categoryId -> categories.add(categoryRepository.findById(categoryId).get()));
+            product.setCategories(categories);
+        } else {
+            product.getCategories().clear();
+        }
+
+        return product;
+    }
+
+    @Transactional
+    public void deleteProduct(Long id){
+        productRepository.deleteById(id);
     }
 
 }

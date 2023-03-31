@@ -27,6 +27,35 @@
     <link rel="stylesheet" href="/admin/css/select2.min.css">
     <link rel="stylesheet" href="/admin/css/select2-bootstrap4.min.css">
 
+    <style>
+        img {
+            max-width: 100%;
+            display: block;
+            margin: auto;
+        }
+
+        .image-item {
+            border: 2px solid #eee;
+        }
+
+        .btn-delete-img {
+            width: 100%;
+            background-color: #dc3545;
+            color: #fff;
+            border: 1px solid #dc3545;
+            border-radius: 5px;
+            padding-bottom: 2px;
+            padding-top: 2px;
+        }
+        .error{
+            width: 100%;
+            color: red;
+            font-size: 15px;
+            padding-top: 10px;
+        }
+
+    </style>
+
 </head>
 
 <body id="page-top">
@@ -103,7 +132,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row justify-content-center">
-                                        <div class="col-md-11">
+                                        <form class="col-md-11" id="update-basic-form">
                                             <div class="text-bold" style="font-size: 18px;">Thông tin chung</div>
                                             <hr>
                                             <br>
@@ -111,7 +140,7 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="name">Tên sản phẩm</label>
-                                                        <input type="text" class="form-control" id="name" />
+                                                        <input type="text" class="form-control" id="name" name="product-name" />
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
@@ -120,9 +149,9 @@
                                                         <div class="select2-purple">
                                                             <select class="select2 form-control" multiple="multiple"
                                                                 id="category">
-                                                                <option value="">Nam</option>
-                                                                <option value="">Nữ</option>
-                                                                <option value="">Trẻ em</option>
+<!--                                                                <option value="">Nam</option>-->
+<!--                                                                <option value="">Nữ</option>-->
+<!--                                                                <option value="">Trẻ em</option>-->
                                                             </select>
                                                         </div>
                                                     </div>
@@ -138,7 +167,7 @@
                                                 <label for="description">Mô tả ngắn</label>
                                                 <textarea id="description" class="form-control" rows="3"></textarea>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -191,7 +220,7 @@
                                             <div class="modal fade" id="modal-add-variant" style="display: none;"
                                                 aria-hidden="true">
                                                 <div class="modal-dialog">
-                                                    <div class="modal-content">
+                                                    <form class="modal-content" id="create-variant-form">
                                                         <div class="modal-header">
                                                             <h4 class="modal-title">Thông tin phiên bản</h4>
                                                             <button type="button" class="close" data-dismiss="modal"
@@ -203,22 +232,31 @@
                                                             <div class="form-group input-row pt-2">
                                                                 <label for="createSku">Sku</label>
                                                                 <input type="text" class="form-control" id="createSku"
-                                                                    placeholder="Enter sku">
+                                                                       name="createSku" placeholder="Enter sku">
                                                             </div>
                                                             <div class="form-group input-row pt-2">
                                                                 <label for="createColor">Màu sắc</label>
-                                                                <input type="text" class="form-control" id="createColor"
-                                                                    placeholder="Enter color">
+                                                                <select class="form-control color" name="createColor" id="createColor">
+                                                                    <option value="black">Đen</option>
+                                                                    <option value="white">Trắng</option>
+                                                                    <option value="gray">Xám</option>
+                                                                    <option value="red">Đỏ</option>
+                                                                    <option value="blue">Xanh da trời</option>
+                                                                    <option value="green">Xanh lá cây</option>
+                                                                    <option value="yellow">Vàng</option>
+                                                                    <option value="purple">Tím</option>
+                                                                </select>
                                                             </div>
                                                             <div class="form-group input-row pt-2">
                                                                 <label for="createSize">Kích thước</label>
                                                                 <input type="text" class="form-control" id="createSize"
-                                                                    placeholder="Enter size">
+                                                                       name="createSize" placeholder="Enter size">
                                                             </div>
                                                             <div class="form-group pt-2">
                                                                 <label for="createPrice">Giá</label>
                                                                 <input type="number" class="form-control"
-                                                                    id="createPrice" placeholder="Enter price">
+                                                                    id="createPrice" name="createPrice"
+                                                                       placeholder="Enter price">
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer justify-content-between">
@@ -227,7 +265,7 @@
                                                             <button type="button" class="btn btn-primary"
                                                                 id="create-variant" data-dismiss="modal">Lưu</button>
                                                         </div>
-                                                    </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -357,6 +395,30 @@
     </script>
 
 
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!--    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"-->
+    <!--            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"-->
+    <!--            crossorigin="anonymous"></script>-->
+    <!--    <script src="https://code.jquery.com/jquery-3.6.3.js"-->
+    <!--            integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+          integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+            integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="/admin/js/custom/toastr-config.js"></script>
+    <script src="/admin/js/custom/product.js"></script>
+    <script src="/admin/js/custom/validate.js"></script>
 </body>
 
 </html>

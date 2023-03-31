@@ -74,8 +74,8 @@ public class AdminController {
         return "admin/products/products";
     }
 
-    @GetMapping("/product")
-    public String getProduct(){
+    @GetMapping("/product/{id}")
+    public String getProduct(@PathVariable Long id){
         return "admin/products/product";
     }
 
