@@ -180,6 +180,8 @@ function createVariant(){
             productObj.variants.push(res);
             console.log(productObj);
             renderVariants(productObj.variants);
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').hide();
         },
         error: function(e){
             toastr.error(e.responseJSON.message);

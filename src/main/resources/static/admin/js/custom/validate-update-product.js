@@ -33,16 +33,16 @@ $('#create-variant-form').validate({
         },
     },
     messages: {
-        "sku" : {
+        "createSku" : {
             required: "Mã SKU không được bỏ trống",
         },
         "createColor" : {
             required: "Màu không được bỏ trống",
         },
-        "size" : {
+        "createSize" : {
             required: "Size không được bỏ trống",
         },
-        "price" : {
+        "createPrice" : {
             required: "Giá tiền không được bỏ trống",
         },
     },

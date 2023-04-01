@@ -61,101 +61,101 @@
                                         <tr>
                                             <th>Tên sản phẩm</th>
                                             <th>SKU</th>
-                                            <th>Màu sắc</th>
-                                            <th>Kích thước</th>
-                                            <th>Tồn kho</th>
+                                            <th width="10%">Màu sắc</th>
+                                            <th width="10%">Kích thước</th>
+                                            <th width="10%">Tồn kho</th>
                                             <th>Giá</th>
-                                            <th></th>
+                                            <th width="20%"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Mũ lưỡi trai</td>
-                                            <td>1234567890</td>
-                                            <td>Black</td>
-                                            <td>M</td>
-                                            <td>10</td>
-                                            <td>56000 VNĐ</td>
-                                            <td class="text-center">
-                                                <a href="javascript:void(0)" class="card-link" data-toggle="modal"
-                                                    data-target="#modal-update">Cập nhật
-                                                </a>
-                                                <!-- Update modal-->
-                                                <div class="modal fade" id="modal-update" style="display: none;"
-                                                    aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h4 class="modal-title">Cập nhật phiên bản sản phẩm</h4>
-                                                                <button type="button" class="close" data-dismiss="modal"
-                                                                    aria-label="Close">
-                                                                    <span aria-hidden="true">×</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="form-group">
-                                                                    <label>Sku</label>
-                                                                    <input type="text" class="form-control updateSku">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label>Màu sắc</label>
-                                                                    <input type="text" class="form-control updateColor" disabled>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label>Kích thước</label>
-                                                                    <input type="text" class="form-control updateSize" disabled>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label>Giá</label>
-                                                                    <input type="number" min="0"
-                                                                        class="form-control updatePrice">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label>Tồn kho</label>
-                                                                    <input type="number" min="0"
-                                                                        class="form-control updateQuantity">
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer justify-content-between">
-                                                                <button type="button" class="btn btn-default"
-                                                                    data-dismiss="modal">Hủy</button>
-                                                                <button type="button" class="btn btn-primary"
-                                                                    data-dismiss="modal">Cập nhật phiên bản</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                &ensp; | &ensp;
-                                                <a href="javascript:void(0)" class="card-link" data-toggle="modal"
-                                                    data-target="#modal-delete" style="color: red;">Delete</a>
-                                                <!--Delete modal-->
-                                                <div class="modal fade" id="modal-delete" style="display: none;"
-                                                    aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h4 class="modal-title">Delete</h4>
-                                                                <button type="button" class="close" data-dismiss="modal"
-                                                                    aria-label="Close">
-                                                                    <span aria-hidden="true">×</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <p>Bạn có chắc chắn muốn xóa phiên bản sản phẩm này
-                                                                    không?</p>
-                                                            </div>
-                                                            <div class="modal-footer justify-content-between">
-                                                                <button type="button" class="btn btn-default"
-                                                                    data-dismiss="modal">Hủy</button>
-                                                                <button type="button"
-                                                                    class="btn btn-primary">Xóa</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
+<!--                                        <tr>-->
+<!--                                            <td>Mũ lưỡi trai</td>-->
+<!--                                            <td>1234567890</td>-->
+<!--                                            <td>Black</td>-->
+<!--                                            <td>M</td>-->
+<!--                                            <td>10</td>-->
+<!--                                            <td>56000 VNĐ</td>-->
+<!--                                            <td class="text-center">-->
+<!--                                                <a href="javascript:void(0)" class="card-link" data-toggle="modal"-->
+<!--                                                    data-target="#modal-update">Cập nhật-->
+<!--                                                </a>-->
+<!--                                                &lt;!&ndash; Update modal&ndash;&gt;-->
+<!--                                                <div class="modal fade" id="modal-update" style="display: none;"-->
+<!--                                                    aria-hidden="true">-->
+<!--                                                    <div class="modal-dialog">-->
+<!--                                                        <div class="modal-content">-->
+<!--                                                            <div class="modal-header">-->
+<!--                                                                <h4 class="modal-title">Cập nhật phiên bản sản phẩm</h4>-->
+<!--                                                                <button type="button" class="close" data-dismiss="modal"-->
+<!--                                                                    aria-label="Close">-->
+<!--                                                                    <span aria-hidden="true">×</span>-->
+<!--                                                                </button>-->
+<!--                                                            </div>-->
+<!--                                                            <div class="modal-body">-->
+<!--                                                                <div class="form-group">-->
+<!--                                                                    <label>Sku</label>-->
+<!--                                                                    <input type="text" class="form-control updateSku">-->
+<!--                                                                </div>-->
+<!--                                                                <div class="form-group">-->
+<!--                                                                    <label>Màu sắc</label>-->
+<!--                                                                    <input type="text" class="form-control updateColor" disabled>-->
+<!--                                                                </div>-->
+<!--                                                                <div class="form-group">-->
+<!--                                                                    <label>Kích thước</label>-->
+<!--                                                                    <input type="text" class="form-control updateSize" disabled>-->
+<!--                                                                </div>-->
+<!--                                                                <div class="form-group">-->
+<!--                                                                    <label>Giá</label>-->
+<!--                                                                    <input type="number" min="0"-->
+<!--                                                                        class="form-control updatePrice">-->
+<!--                                                                </div>-->
+<!--                                                                <div class="form-group">-->
+<!--                                                                    <label>Tồn kho</label>-->
+<!--                                                                    <input type="number" min="0"-->
+<!--                                                                        class="form-control updateQuantity">-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                            <div class="modal-footer justify-content-between">-->
+<!--                                                                <button type="button" class="btn btn-default"-->
+<!--                                                                    data-dismiss="modal">Hủy</button>-->
+<!--                                                                <button type="button" class="btn btn-primary"-->
+<!--                                                                    data-dismiss="modal">Cập nhật phiên bản</button>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                &ensp; | &ensp;-->
+<!--                                                <a href="javascript:void(0)" class="card-link" data-toggle="modal"-->
+<!--                                                    data-target="#modal-delete" style="color: red;">Delete</a>-->
+<!--                                                &lt;!&ndash;Delete modal&ndash;&gt;-->
+<!--                                                <div class="modal fade" id="modal-delete" style="display: none;"-->
+<!--                                                    aria-hidden="true">-->
+<!--                                                    <div class="modal-dialog">-->
+<!--                                                        <div class="modal-content">-->
+<!--                                                            <div class="modal-header">-->
+<!--                                                                <h4 class="modal-title">Delete</h4>-->
+<!--                                                                <button type="button" class="close" data-dismiss="modal"-->
+<!--                                                                    aria-label="Close">-->
+<!--                                                                    <span aria-hidden="true">×</span>-->
+<!--                                                                </button>-->
+<!--                                                            </div>-->
+<!--                                                            <div class="modal-body">-->
+<!--                                                                <p>Bạn có chắc chắn muốn xóa phiên bản sản phẩm này-->
+<!--                                                                    không?</p>-->
+<!--                                                            </div>-->
+<!--                                                            <div class="modal-footer justify-content-between">-->
+<!--                                                                <button type="button" class="btn btn-default"-->
+<!--                                                                    data-dismiss="modal">Hủy</button>-->
+<!--                                                                <button type="button"-->
+<!--                                                                    class="btn btn-primary">Xóa</button>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </td>-->
 
-                                        </tr>
+<!--                                        </tr>-->
                                     </tbody>
                                 </table>
                             </div>
@@ -225,6 +225,31 @@
 
     <!-- Page level custom scripts -->
     <script src="/admin/js/demo/datatables-demo.js"></script>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!--    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"-->
+    <!--            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"-->
+    <!--            crossorigin="anonymous"></script>-->
+    <!--    <script src="https://code.jquery.com/jquery-3.6.3.js"-->
+    <!--            integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+          integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+            integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="/admin/js/custom/toastr-config.js"></script>
+    <script src="/admin/js/custom/variants.js"></script>
+    <script src="/admin/js/custom/validate-update-variant.js"></script>
 
 </body>
 

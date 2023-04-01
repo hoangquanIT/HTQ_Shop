@@ -1,11 +1,39 @@
 package com.quanht.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.quanht.dto.AccountDto;
+import com.quanht.dto.VariantDto;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
+
+
+@NamedNativeQuery(
+        name = "getVariants",
+        query = "SELECT v.id, v.sku, v.size, v.color, v.price, v.quantity, " +
+                "p.name, v.created_at, v.updated_at " +
+                "FROM variant v INNER JOIN product p ON v.product_id = p.id ",
+        resultSetMapping = "Variants"
+)
+@SqlResultSetMapping(
+        name = "Variants",
+        classes = @ConstructorResult(
+                targetClass = VariantDto.class,
+                columns = {
+                        @ColumnResult(name = "id", type = Long.class),
+                        @ColumnResult(name = "sku", type = String.class),
+                        @ColumnResult(name = "size", type = String.class),
+                        @ColumnResult(name = "color", type = String.class),
+                        @ColumnResult(name = "price", type = Double.class),
+                        @ColumnResult(name = "quantity", type = Integer.class),
+                        @ColumnResult(name = "name", type = String.class),
+                        @ColumnResult(name = "created_at", type = LocalDateTime.class),
+                        @ColumnResult(name = "updated_at", type = LocalDateTime.class)
+                }
+        )
+)
 
 @NoArgsConstructor
 @AllArgsConstructor

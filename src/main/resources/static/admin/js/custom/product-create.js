@@ -116,7 +116,6 @@ function createProduct(){
             toastr.success("Add Product successfully");
         },
         error: function(e){
-            console.log(e);
             toastr.error(e.responseJSON.message);
             formData.delete("product")
         }
