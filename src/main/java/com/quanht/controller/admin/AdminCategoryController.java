@@ -11,12 +11,12 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/ecommerce/api/v1/category")
-public class CategoryController {
+public class AdminCategoryController {
 
     private CategoryService categoryService;
 
     @Autowired
-    public CategoryController(CategoryService categoryService) {
+    public AdminCategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
 
@@ -33,7 +33,7 @@ public class CategoryController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateCategory(@PathVariable("id") Long id,
-            @Valid @RequestBody CategoryRequest categoryRequest){
+                                            @Valid @RequestBody CategoryRequest categoryRequest){
         categoryService.updateCategory(id, categoryRequest);
         return ResponseEntity.noContent().build();
     }

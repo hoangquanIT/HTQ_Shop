@@ -44,6 +44,9 @@
         </style>
     </noscript>
 
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/web/custom/css/quantitybox.css"/>
+
     <!-- Page Title -->
     <title>HTQ Shop</title>
 
@@ -52,10 +55,10 @@
 <body class="">
 
 <!-- Main Section-->
-<section class="mt-0 overflow-lg-hidden  vh-lg-100">
+<section class="mt-0 overflow-lg-hidden">
     <!-- Page Content Goes Here -->
     <div class="container">
-        <div class="row g-0 vh-lg-100">
+        <div class="row g-0" style="min-height: 100vh">
             <div class="col-12 col-lg-7 pt-5 pt-lg-10">
                 <div class="pe-lg-5">
                     <!-- Logo-->
@@ -106,7 +109,17 @@
                                                 <i class="ri-close-line ms-3"></i>
                                             </h6>
                                             <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size:
-                                                        9 / Qty: 1</span>
+                                                        9 / Color: Blue</span>
+                                            <div class="qty-input">
+                                                <button class="qty-count qty-count--minus" data-action="minus"
+                                                        type="button">-
+                                                </button>
+                                                <input class="product-qty" type="number" name="product-qty" min="0"
+                                                       max="10" value="1">
+                                                <button class="qty-count qty-count--add" data-action="add"
+                                                        type="button">+
+                                                </button>
+                                            </div>
                                         </div>
                                         <p class="fw-bolder text-end text-muted m-0">$85.00</p>
                                     </div>
@@ -132,7 +145,6 @@
                                         <p class="fw-bolder text-end text-muted m-0">$125.00</p>
                                     </div>
                                 </div> <!-- / Cart Item-->
-                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -165,12 +177,35 @@
 </section>
 <!-- / Main Section-->
 
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+            integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+      integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <!-- Theme JS -->
 <!-- Vendor JS -->
 <script src="/web/js/vendor.bundle.js"></script>
 
 <!-- Theme JS -->
 <script src="/web/js/theme.bundle.js"></script>
+
+<script src="/web/custom/js/quantitybox.js"></script>
 </body>
 
 </html>

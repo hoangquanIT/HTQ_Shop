@@ -13,6 +13,7 @@ function getCategories(){
         type: 'GET',
         dataType: 'json',
         success: function(data){
+            console.log(data);
             categoryArr = data;
             //renderCategoriesToSelectBox(data);
         },
@@ -49,6 +50,7 @@ function getProduct(){
         type: "GET",
         dataType: "json",
         success: function(data){
+            console.log(data);
             productObj = data;
             renderProduct(data);
         },

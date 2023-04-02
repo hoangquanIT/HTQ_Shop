@@ -12,6 +12,9 @@ function getRoles(){
         dataType: 'json',
         success: function(res){
             console.log(res);
+            if ($.fn.DataTable.isDataTable('#dataTable')) {
+                $('#dataTable').DataTable().clear().destroy();
+            }
             renderRoles(res);
         },
         error: function(e){
@@ -20,16 +23,12 @@ function getRoles(){
     })
 }
 
-function renderRoles(arr){
-    let html = '';
-    arr.forEach(element => {
-        html += `
-            <tr>
-                <td>${element.id}</td>
-                <td>${element.name}</td>
-                <td>${element.createdAt}</td>
-            </tr>
-        `;
-    })
-    $('#list-role').html(html);
+function renderRoles(data){
+    $('#dataTable').DataTable({
+        "columns": [
+            {"data": "id"},
+            {"data": "name"},
+            {"data": "createdAt"},
+        ]
+    }).rows.add(data).draw();
 }

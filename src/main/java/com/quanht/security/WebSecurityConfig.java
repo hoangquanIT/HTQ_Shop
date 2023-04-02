@@ -47,7 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/ecommerce/api/v1/auth/**").permitAll()
                 .antMatchers("/admin/css/**", "/admin/custom/**", "/admin/img/**",
-                        "/admin/js/**", "/admin/scss/**", "/admin/vendor/**").permitAll()
+                        "/admin/js/**", "/admin/scss/**", "/admin/vendor/**", "/ecommerce/api/v1/client/**").permitAll()
                 .antMatchers("/admin/roles", "/admin/employees", "/admin/employee/**",
                         "/ecommerce/api/v1/employee/**", "/ecommerce/api/v1/roles/**")
                 .hasRole("ADMIN")
