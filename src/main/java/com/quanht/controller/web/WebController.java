@@ -1,5 +1,6 @@
 package com.quanht.controller.web;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,15 @@ public class WebController {
         return "web/cart";
     }
 
+    @GetMapping("/account")
+    public String getCustomerDetails(){
+        return "web/customer-info";
+    }
+
+    @GetMapping("/unauthorized")
+    public String getUnauthorizedPage(){
+        return "admin/access-denied";
+    }
 
     // -------------------------------- PAYMENTS --------------------------------
     @GetMapping("/checkout")

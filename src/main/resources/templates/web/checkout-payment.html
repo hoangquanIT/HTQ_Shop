@@ -74,12 +74,10 @@
                     <!-- / Logo-->
                     <nav class="d-none d-md-block">
                         <ul class="list-unstyled d-flex justify-content-start mt-4 align-items-center fw-bolder small">
-                            <li class="me-4"><a class="nav-link-checkout " href="/shop/cart">Your Cart</a></li>
-                            <li class="me-4"><a class="nav-link-checkout " href="/shop/checkout">Information</a></li>
-                            <li class="me-4"><a class="nav-link-checkout " href="shop/checkout/shipping">Shipping</a>
-                            </li>
+                            <li class="me-4"><a class="nav-link-checkout " href="/shop/cart">Giỏ hàng</a></li>
+                            <li class="me-4"><a class="nav-link-checkout " href="/shop/checkout">Thông tin giao hàng</a></li>
                             <li><a class="nav-link-checkout nav-link-last active"
-                                   href="/shop/checkout/payment">Payment</a></li>
+                                   href="/shop/checkout/payment">Phương thức thanh toán</a></li>
                         </ul>
                     </nav>
                     <div class="mt-5">
@@ -87,29 +85,36 @@
                         <ul class="list-group mb-5 d-none d-lg-block rounded-0">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div class="d-flex justify-content-start align-items-center">
-                                    <span class="text-muted small me-2 f-w-36 fw-bolder">Contact</span>
+                                    <span class="text-muted small me-2 f-w-36 fw-bolder">Email</span>
                                     <span class="small">test@email.com</span>
                                 </div>
                                 <a href="/shop/checkout" class="text-muted small" role="button">Change</a>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div class="d-flex justify-content-start align-items-center">
-                                    <span class="text-muted small me-2 f-w-36 fw-bolder">Deliver To</span>
+                                    <span class="text-muted small me-2 f-w-36 fw-bolder">Số điện thoại</span>
+                                    <span class="small">0914234122</span>
+                                </div>
+                                <a href="/shop/checkout" class="text-muted small" role="button">Change</a>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div class="d-flex justify-content-start align-items-center">
+                                    <span class="text-muted small me-2 f-w-36 fw-bolder">Giao đến</span>
                                     <span class="small">123 Street, London, SM3 5TY, United Kingdom</span>
                                 </div>
                                 <a href="/shop/checkout/shipping" class="text-muted small" role="button">Change</a>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <div class="d-flex justify-content-start align-items-center">
-                                    <span class="text-muted small me-2 f-w-36 fw-bolder">Method</span>
-                                    <span class="small">UPS Priority Delivery</span>
-                                </div>
-                                <a href="/shop/checkout/shipping" class="text-muted small" role="button">Change</a>
-                            </li>
+<!--                            <li class="list-group-item d-flex justify-content-between align-items-center">-->
+<!--                                <div class="d-flex justify-content-start align-items-center">-->
+<!--                                    <span class="text-muted small me-2 f-w-36 fw-bolder">Method</span>-->
+<!--                                    <span class="small">UPS Priority Delivery</span>-->
+<!--                                </div>-->
+<!--                                <a href="/shop/checkout/shipping" class="text-muted small" role="button">Change</a>-->
+<!--                            </li>-->
                         </ul><!-- / Checkout Information Summary-->
 
                         <!-- Checkout Panel Information-->
-                        <h3 class="fs-5 fw-bolder mb-4 border-bottom pb-4">Payment Information</h3>
+                        <h3 class="fs-5 fw-bolder mb-4 border-bottom pb-4">Thông tin thanh toán</h3>
 
                         <div class="row">
 
@@ -213,9 +218,8 @@
                                 class="pt-5 mt-5 pb-5 border-top d-flex flex-column flex-md-row justify-content-between align-items-center">
                             <a href="/shop/checkout/shipping"
                                class="btn ps-md-0 btn-link fw-bolder w-100 w-md-auto mb-2 mb-md-0"
-                               role="button">Back to
-                                shipping</a>
-                            <a href="#" class="btn btn-dark w-100 w-md-auto" role="button">Complete Order</a>
+                               role="button">Thông tin giao hàng</a>
+                            <a href="#" class="btn btn-dark w-100 w-md-auto" role="button">Đặt hàng</a>
                         </div>
                     </div>
                 </div>
@@ -236,9 +240,11 @@
                                 <div>
                                     <h6 class="justify-content-between d-flex align-items-start mb-2">
                                         Nike Air VaporMax 2021
-                                        <i class="ri-close-line ms-3"></i>
                                     </h6>
-                                    <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: 9 / Qty: 1</span>
+                                    <div class="d-block text-muted fw-bolder text-uppercase fs-9">
+                                        <span id="product-size">Size: 9</span> /
+                                        <span id="product-color">Màu: Blue</span>
+                                    </div>
                                 </div>
                                 <p class="fw-bolder text-end text-muted m-0">$85.00</p>
                             </div>
@@ -264,31 +270,31 @@
                             </div>
                         </div> <!-- / Cart Item-->
                     </div>
-                    <div class="py-4 border-bottom">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <p class="m-0 fw-bolder fs-6">Subtotal</p>
-                            <p class="m-0 fs-6 fw-bolder">$422.99</p>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center ">
-                            <p class="m-0 fw-bolder fs-6">Shipping</p>
-                            <p class="m-0 fs-6 fw-bolder">$8.95</p>
-                        </div>
-                    </div>
+<!--                    <div class="py-4 border-bottom">-->
+<!--                        <div class="d-flex justify-content-between align-items-center mb-2">-->
+<!--                            <p class="m-0 fw-bolder fs-6">Subtotal</p>-->
+<!--                            <p class="m-0 fs-6 fw-bolder">$422.99</p>-->
+<!--                        </div>-->
+<!--                        <div class="d-flex justify-content-between align-items-center ">-->
+<!--                            <p class="m-0 fw-bolder fs-6">Shipping</p>-->
+<!--                            <p class="m-0 fs-6 fw-bolder">$8.95</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
                     <div class="py-4 border-bottom">
                         <div class="d-flex justify-content-between">
                             <div>
-                                <p class="m-0 fw-bold fs-5">Grand Total</p>
-                                <span class="text-muted small">Inc $45.89 sales tax</span>
+                                <p class="m-0 fw-bold fs-5">Tạm tính</p>
+<!--                                <span class="text-muted small">Inc $45.89 sales tax</span>-->
                             </div>
                             <p class="m-0 fs-5 fw-bold">$422.99</p>
                         </div>
                     </div>
-                    <div class="py-4">
-                        <div class="input-group mb-0">
-                            <input type="text" class="form-control" placeholder="Enter your coupon code">
-                            <button class="btn btn-dark btn-sm px-4">Apply</button>
-                        </div>
-                    </div>
+<!--                    <div class="py-4">-->
+<!--                        <div class="input-group mb-0">-->
+<!--                            <input type="text" class="form-control" placeholder="Enter your coupon code">-->
+<!--                            <button class="btn btn-dark btn-sm px-4">Apply</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
             </div>
         </div>

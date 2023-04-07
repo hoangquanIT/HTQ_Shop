@@ -4,6 +4,7 @@ import com.quanht.service.AccountService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,11 +17,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
+@Order(1)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final AccountService accountService;
     private final AuthenticationEntryPointCustom authenticationEntryPointCustom;
     private final AuthorizationFilterCustom authorizationFilterCustom;
     private final AccessDeniedHandlerCustom accessDeniedHandlerCustom;
+
+    private final ClientAuthenticationEntryPointCustom clientAuthenticationEntryPointCustom;
+    private final ClientAccessDeniedHandlerCustom clientAccessDeniedHandlerCustom;
 
 
     @Bean
@@ -61,13 +66,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .hasAnyRole( "ORDER", "CUSTOMER_CARE", "ADMIN")
 //                .antMatchers("/admin/**")
 //                .hasRole("ADMIN")
+                //.anyRequest().authenticated()
+//                .and()
+//                .formLogin()
+//                .loginPage("/admin")
+//                .defaultSuccessUrl("/admin/dashboard")
+//                .failureUrl("/admin?error")
+//                .permitAll()
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPointCustom)
                 .accessDeniedHandler(accessDeniedHandlerCustom)
                 .and()
                 .logout()
-//                    .logoutUrl("/logout-handle")
+                    //.logoutUrl("/admin/logout")
+                //.logoutSuccessUrl("/admin")
                 .invalidateHttpSession(true)
                 .deleteCookies("JWT_COOKIE", "JSESSIONID")
 //                    .logoutSuccessHandler((new HttpStatusReturningLogoutSuccessHandler(HttpStatus.OK)))

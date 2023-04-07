@@ -78,73 +78,76 @@
                     <nav class="d-none d-md-block">
                         <ul
                                 class="list-unstyled d-flex justify-content-start mt-4 align-items-center fw-bolder small">
-                            <li class="me-4"><a class="nav-link-checkout active" href="/shop/cart">Your Cart</a>
+                            <li class="me-4"><a class="nav-link-checkout active" href="/shop/cart">Giỏ hàng</a>
                             </li>
-                            <li class="me-4"><a class="nav-link-checkout " href="/shop/checkout">Information</a>
+                            <li class="me-4"><a class="nav-link-checkout " href="/shop/checkout" id="checkout-link">Thông tin giao hàng</a>
                             </li>
-                            <li class="me-4"><a class="nav-link-checkout "
-                                                href="/shop/checkout/shipping">Shipping</a></li>
+<!--                            <li class="me-4"><a class="nav-link-checkout "-->
+<!--                                                href="/shop/checkout/shipping">Shipping</a></li>-->
                             <li><a class="nav-link-checkout nav-link-last "
-                                   href="/shop/checkout/payment">Payment</a></li>
+                                   href="/shop/checkout/payment" id="payment-link">Phương thức thanh toán</a></li>
                         </ul>
                     </nav>
                     <div class="mt-5">
-                        <h3 class="fs-5 fw-bolder mb-0 border-bottom pb-4">Your Cart</h3>
+                        <h3 class="fs-5 fw-bolder mb-0 border-bottom pb-4">Giỏ hàng</h3>
                         <div class="table-responsive">
                             <table class="table align-middle">
-                                <tbody class="border-0">
+                                <tbody class="border-0" id="cart-items">
+<!--                                 Cart Item-->
+<!--                                <div class="row mx-0 py-4 g-0 border-bottom">-->
+<!--                                    <div class="col-2 position-relative">-->
+<!--                                        <picture class="d-block border">-->
+<!--                                            <img class="img-fluid"-->
+<!--                                                 src="/web/img/products/product-cart-1.jpg"-->
+<!--                                                 alt="HTML Bootstrap Template by Pixel Rocket">-->
+<!--                                        </picture>-->
+<!--                                    </div>-->
+<!--                                    <div class="col-9 offset-1">-->
+<!--                                        <div>-->
+<!--                                            <h6 class="justify-content-between d-flex align-items-start mb-2">-->
+<!--                                                Nike Air VaporMax 2021-->
+<!--                                                <button type="button"><span>×</span></button>-->
+<!--                                            </h6>-->
+<!--                                            <div class="d-block text-muted fw-bolder text-uppercase fs-9">-->
+<!--                                                <span id="product-size">Size: 9</span> /-->
+<!--                                                <span id="product-color">Màu: Blue</span>-->
+<!--                                            </div>-->
+<!--                                            <div class="qty-input">-->
+<!--                                                <button class="qty-count qty-count&#45;&#45;minus" data-action="minus"-->
+<!--                                                        type="button" onclick="changeBtn(this)">- -->
+<!--                                                </button>-->
+<!--                                                <input class="product-qty" type="number" name="product-qty" min="0"-->
+<!--                                                       max="10" value="1" onchange="changeQtyValue(this)">-->
+<!--                                                <button class="qty-count qty-count&#45;&#45;add" data-action="add"-->
+<!--                                                        type="button" onclick="changeBtn(this)">+-->
+<!--                                                </button>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <p class="fw-bolder text-end text-muted m-0">$85.00</p>-->
+<!--                                    </div>-->
+<!--                                </div> &lt;!&ndash; / Cart Item&ndash;&gt;-->
                                 <!-- Cart Item-->
-                                <div class="row mx-0 py-4 g-0 border-bottom">
-                                    <div class="col-2 position-relative">
-                                        <picture class="d-block border">
-                                            <img class="img-fluid"
-                                                 src="/web/img/products/product-cart-1.jpg"
-                                                 alt="HTML Bootstrap Template by Pixel Rocket">
-                                        </picture>
-                                    </div>
-                                    <div class="col-9 offset-1">
-                                        <div>
-                                            <h6 class="justify-content-between d-flex align-items-start mb-2">
-                                                Nike Air VaporMax 2021
-                                                <i class="ri-close-line ms-3"></i>
-                                            </h6>
-                                            <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size:
-                                                        9 / Color: Blue</span>
-                                            <div class="qty-input">
-                                                <button class="qty-count qty-count--minus" data-action="minus"
-                                                        type="button">-
-                                                </button>
-                                                <input class="product-qty" type="number" name="product-qty" min="0"
-                                                       max="10" value="1">
-                                                <button class="qty-count qty-count--add" data-action="add"
-                                                        type="button">+
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <p class="fw-bolder text-end text-muted m-0">$85.00</p>
-                                    </div>
-                                </div> <!-- / Cart Item-->
-                                <!-- Cart Item-->
-                                <div class="row mx-0 py-4 g-0 border-bottom">
-                                    <div class="col-2 position-relative">
-                                        <picture class="d-block border">
-                                            <img class="img-fluid"
-                                                 src="/web/img/products/product-cart-2.jpg"
-                                                 alt="HTML Bootstrap Template by Pixel Rocket">
-                                        </picture>
-                                    </div>
-                                    <div class="col-9 offset-1">
-                                        <div>
-                                            <h6 class="justify-content-between d-flex align-items-start mb-2">
-                                                Nike ZoomX Vaporfly
-                                                <i class="ri-close-line ms-3"></i>
-                                            </h6>
-                                            <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size:
-                                                        11 / Qty: 1</span>
-                                        </div>
-                                        <p class="fw-bolder text-end text-muted m-0">$125.00</p>
-                                    </div>
-                                </div> <!-- / Cart Item-->
+<!--                                <div class="row mx-0 py-4 g-0 border-bottom">-->
+<!--                                    <div class="col-2 position-relative">-->
+<!--                                        <picture class="d-block border">-->
+<!--                                            <img class="img-fluid"-->
+<!--                                                 src="/web/img/products/product-cart-2.jpg"-->
+<!--                                                 alt="HTML Bootstrap Template by Pixel Rocket">-->
+<!--                                        </picture>-->
+<!--                                    </div>-->
+<!--                                    <div class="col-9 offset-1">-->
+<!--                                        <div>-->
+<!--                                            <h6 class="justify-content-between d-flex align-items-start mb-2">-->
+<!--                                                Nike ZoomX Vaporfly-->
+<!--                                                <i class="ri-close-line ms-3"></i>-->
+<!--                                            </h6>-->
+<!--                                            <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size:-->
+<!--                                                        11 / Qty: 1</span>-->
+<!--                                        </div>-->
+<!--                                        <p class="fw-bolder text-end text-muted m-0">$125.00</p>-->
+<!--                                    </div>-->
+<!--                                </div> &lt;!&ndash; / Cart Item&ndash;&gt;-->
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -155,20 +158,19 @@
                     <div class="pb-4 border-bottom">
                         <div class="d-flex flex-column flex-md-row justify-content-md-between mb-4 mb-md-2">
                             <div>
-                                <p class="m-0 fw-bold fs-5">Grand Total</p>
-                                <span class="text-muted small">Inc $45.89 sales tax</span>
+                                <p class="m-0 fw-bold fs-5">Tạm tính</p>
+<!--                                <span class="text-muted small">Inc $45.89 sales tax</span>-->
                             </div>
-                            <p class="m-0 fs-5 fw-bold">$422.99</p>
+                            <p class="m-0 fs-5 fw-bold" id="total-price">$422.99</p>
                         </div>
                     </div>
-                    <div class="py-4">
-                        <div class="input-group mb-0">
-                            <input type="text" class="form-control" placeholder="Enter coupon code">
-                            <button class="btn btn-secondary btn-sm px-4">Apply</button>
-                        </div>
-                    </div>
-                    <a href="/shop/checkout" class="btn btn-dark w-100 text-center" role="button">Proceed to
-                        checkout</a>
+<!--                    <div class="py-4">-->
+<!--                        <div class="input-group mb-0">-->
+<!--                            <input type="text" class="form-control" placeholder="Enter coupon code">-->
+<!--                            <button class="btn btn-secondary btn-sm px-4">Apply</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <a href="/shop/checkout" class="btn btn-dark w-100 text-center" role="button" id="next-to-checkout">Thanh toán</a>
                 </div>
             </div>
         </div>
@@ -205,7 +207,9 @@
 <!-- Theme JS -->
 <script src="/web/js/theme.bundle.js"></script>
 
-<script src="/web/custom/js/quantitybox.js"></script>
+<script src="/web/custom/js/cart.js"></script>
+<!--<script src="/web/custom/js/quantitybox.js"></script>-->
+
 </body>
 
 </html>

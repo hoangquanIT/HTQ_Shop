@@ -110,10 +110,31 @@
           <!-- /Navbar Search-->
 
           <!-- Navbar Login-->
-          <li class="ms-1 d-none d-lg-inline-block">
-            <a class="nav-link text-body" href="/shop/login">
-              Account
-            </a>
+          <li class="d-flex justify-content-between align-items-center">
+            <th:block sec:authorize="not isAuthenticated()">
+              <a class="nav-link text-body" href="/shop/login">Đăng nhập</a>/
+              <a class="nav-link text-body" href="/shop/register">Đăng ký</a>
+            </th:block>
+            <th:block sec:authorize="isAuthenticated()">
+              <th:block sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')">
+                <a class="nav-link text-body" href="/shop/login">Đăng nhập</a>/
+                <a class="nav-link text-body" href="/shop/register">Đăng ký</a>
+              </th:block>
+              <th:block sec:authorize="hasRole('CUSTOMER')">
+<!--                <a class="nav-link text-body"  href="/shop/account">Tài khoản</a>/-->
+                <div class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                     aria-expanded="false">
+                    Tài khoản
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/shop/account">Thông tin cá nhân</a></li>
+                    <li><a class="dropdown-item" href="./category.html">Thông tin hóa đơn</a></li>
+                    <li><a class="dropdown-item" href="javascript:void(0)" id="btn-logout">Đăng xuất</a></li>
+                  </ul>
+                </div>
+              </th:block>
+            </th:block>
           </li>
           <!-- /Navbar Login-->
 
@@ -121,7 +142,10 @@
           <li class="ms-1 d-inline-block position-relative dropdown-cart">
             <a href="/shop/cart" class="nav-link me-0 disable-child-pointer border-0 p-0 bg-transparent text-body"
                     type="button">
-              Bag (2)
+              <span
+                    style="min-width: 1.2rem; min-height: 1.2rem; width: unset; height: unset;"
+                    id="number-items-cart"></span>
+              <span><i class="ri-shopping-cart-fill" style="font-size: 25px;"></i></span>
             </a>
 <!--            <div class="cart-dropdown dropdown-menu">-->
 

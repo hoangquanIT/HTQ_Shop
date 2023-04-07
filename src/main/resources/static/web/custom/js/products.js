@@ -19,7 +19,6 @@ function getProducts(){
         type: 'GET',
         dataType: 'json',
         success: function(data){
-            console.log(data);
             renderProductList(data);
             renderTitle(data);
             renderPagination(data);
@@ -57,12 +56,12 @@ function renderProductList(data){
                             <img class="w-100 img-fluid position-relative z-index-10" title=""
                                  src="${img.url}" alt="">
                         </picture>
-                        <div class="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
-                            <a href="/shop" class="btn btn-quick-add"><i class="ri-add-line me-2"></i> Quick Add</a>
-                        </div>
+<!--                        <div class="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">-->
+<!--                            <a href="/shop" class="btn btn-quick-add"><i class="ri-add-line me-2"></i> Thêm vào giỏ</a>-->
+<!--                        </div>-->
                     </div>
                     <div class="card-body px-0">
-                        <a class="text-decoration-none" href="#">${el.name}</a>
+                        <a class="text-decoration-none link-cover" href="/shop/product/${el.id}">${el.name}</a>
                         <p class="mt-2 mb-0 small">${renderProductPrice(el)}</p>
                     </div>
                 </div>

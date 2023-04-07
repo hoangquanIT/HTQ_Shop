@@ -3,12 +3,15 @@ package com.quanht.service;
 import com.quanht.dto.AccountDto;
 import com.quanht.dto.CustomerDto;
 import com.quanht.entities.Account;
+import com.quanht.entities.Cart;
 import com.quanht.entities.Role;
 import com.quanht.exception.BadRequestException;
 import com.quanht.exception.NotFoundException;
 import com.quanht.repositories.AccountRepository;
+import com.quanht.repositories.CartRepository;
 import com.quanht.repositories.RoleRepository;
 import com.quanht.request.*;
+import com.quanht.security.ClientJwtUtils;
 import com.quanht.security.JwtUtils;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,13 +40,19 @@ public class AccountService implements UserDetailsService {
 
     private JwtUtils jwtUtils;
 
+    private ClientJwtUtils clientJwtUtils;
+    private CartRepository cartRepository;
+
     @Autowired
     public AccountService(AccountRepository accountRepository, @Lazy BCryptPasswordEncoder passwordEncoder,
-                          RoleRepository roleRepository, JwtUtils jwtUtils) {
+                          RoleRepository roleRepository, JwtUtils jwtUtils, ClientJwtUtils clientJwtUtils,
+                          CartRepository cartRepository) {
         this.accountRepository = accountRepository;
         this.passwordEncoder = passwordEncoder;
         this.roleRepository = roleRepository;
         this.jwtUtils = jwtUtils;
+        this.clientJwtUtils = clientJwtUtils;
+        this.cartRepository = cartRepository;
     }
 
     @Override
@@ -77,6 +86,48 @@ public class AccountService implements UserDetailsService {
         });
     }
 
+    public Account getClientDetail(HttpServletRequest request){
+        // Lấy token từ trong header của request
+        String token = clientJwtUtils.getTokenFromCookie(request);
+
+        // Parse thông tin từ token
+        Claims claims = clientJwtUtils.getClaimsFromToken(token);
+
+        // Lấy username (email khách hàng)
+        String userName = claims.getSubject();
+
+        // Lấy thông tin khách hàng qua email
+        return accountRepository.findByEmail(userName).orElseThrow(() -> {
+            throw new NotFoundException("Không tồn tại tài khoản có email " + userName);
+        });
+    }
+
+    public Cart getClientCartNumbers(HttpServletRequest request){
+        // Lấy token từ trong header của request
+        String token = clientJwtUtils.getTokenFromCookie(request);
+
+        // Parse thông tin từ token
+        Claims claims = clientJwtUtils.getClaimsFromToken(token);
+
+        // Lấy username (email khách hàng)
+        String userName = claims.getSubject();
+
+        System.out.println(userName);
+
+        // Lấy thông tin khách hàng qua email
+        Optional<Account> account = accountRepository.findByEmail(userName);
+
+        System.out.println(account.get().getCurrentCartId());
+
+        if (account.get().getCurrentCartId() != null) {
+            return cartRepository.findById(account.get().getCurrentCartId()).orElseThrow(() -> {
+                throw new NotFoundException("Không tìm thấy giỏ hàng");
+            });
+        } else {
+            return new Cart();
+        }
+    }
+
     @Transactional
     public Account updateInfo(UpdateInfoRequest updateInfo){
         Account account = accountRepository.findById(updateInfo.getId()).orElseThrow(() -> {
@@ -100,6 +151,22 @@ public class AccountService implements UserDetailsService {
     @Transactional
     public Account updatePassword(UpdatePasswordRequest updatePass, HttpServletRequest request){
         Account account = getDetail(request);
+
+        String oldPassword = updatePass.getOldPassword();
+        String newPassword = updatePass.getNewPassword();
+
+        if (passwordEncoder.matches(oldPassword, account.getPassword())){
+            account.setPassword(passwordEncoder.encode(newPassword));
+            return account;
+        } else {
+            throw new BadRequestException("Mật khẩu cũ không chính xác");
+        }
+
+    }
+
+    @Transactional
+    public Account updateClientPassword(UpdatePasswordRequest updatePass, HttpServletRequest request){
+        Account account = getClientDetail(request);
 
         String oldPassword = updatePass.getOldPassword();
         String newPassword = updatePass.getNewPassword();

@@ -95,6 +95,9 @@ public class Account extends BaseEntity implements UserDetails {
     @Column(name = "city_code")
     private Integer cityCode;
 
+    @Column(name = "current_cart_id")
+    private Long currentCartId;
+
     @Column(name = "enabled")
     private Boolean enabled = false;
     @ManyToMany(fetch = FetchType.EAGER)

@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<!-- Head -->
+
+<head>
+    <!-- Page Meta Tags-->
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+
+    <!-- Custom Google Fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+            href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Roboto:wght@300;400;700&display=auto"
+            rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/web/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/web/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/web/img/favicon/favicon-16x16.png">
+    <link rel="mask-icon" href="/web/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="/web/css/libs.bundle.css"/>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="/web/css/theme.bundle.css"/>
+
+    <!-- Fix for custom scrollbar if JS is disabled-->
+    <noscript>
+        <style>
+            /**
+          * Reinstate scrolling for non-JS clients
+          */
+            .simplebar-content-wrapper {
+                overflow: auto;
+            }
+        </style>
+    </noscript>
+
+    <style>
+        .error{
+            width: 100%;
+            color: red;
+            font-size: 15px;
+            padding-top: 10px;
+        }
+    </style>
+
+    <!-- Page Title -->
+    <title>HTQ Shop</title>
+
+</head>
+
+<body class="">
+
+<!-- Navbar -->
+<!-- Navbar -->
+<nav th:replace="~{web/menu :: #topMenu}"></nav>
+<!-- / Navbar--> <!-- / Navbar-->
+
+<!-- Main Section-->
+<section class="mt-0 row">
+    <div class="col-1"></div>
+    <div class="shadow-xl p-4 p-lg-5 bg-white col-10">
+        <h1 class="text-center mb-5 fs-2 fw-bold">Tài khoản</h1>
+        <!--        <a href="#" class="btn btn-facebook d-block mb-2"><i class="ri-facebook-circle-fill align-bottom"></i> Login-->
+        <!--          with Facebook</a>-->
+        <!--        <a href="#" class="btn btn-twitter d-block mb-2"><i class="ri-twitter-fill align-bottom"></i> Login with-->
+        <!--          Twitter</a>-->
+        <!--        <span class="text-muted text-center d-block fw-bolder my-4">OR</span>-->
+        <form id="account-info">
+            <div class="form-group">
+                <label class="form-label" for="account-fullname">Họ tên</label>
+                <input type="text" class="form-control" name="info-name" id="account-fullname" placeholder="Nhập họ tên">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="account-phone">Số điện thoại</label>
+                <input type="text" class="form-control" name="info-phone" id="account-phone"
+                       placeholder="Nhập số điện thoại">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="account-email">Email</label>
+                <input type="email" class="form-control" name="email" id="account-email" placeholder="Nhập email" disabled>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="account-address">Địa chỉ</label>
+              <input type="text" class="form-control" name="address" id="account-address"
+                     placeholder="Nhập địa chỉ">
+            </div>
+            <div class="form-group col-5">
+              <label class="form-label">Tỉnh/Thành phố</label>
+              <select class="form-control" id="select-province" style="width: 100%;"></select>
+            </div>
+            <div class="form-group col-5">
+                <div class="form-group input-row pt-2">
+                    <label>Mật khẩu</label>
+                    <div class="">
+                        <button type="button" class="btn btn-warning" data-toggle="modal"
+                                data-target="#modal-change-password" style="border-radius: 10px;">
+                            Đổi mật khẩu
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-dark d-block w-100 my-4" id="account-update-btn">Cập nhật</button>
+        </form>
+    </div>
+    <div class="col-1"></div>
+
+    <!-- Modal đổi mật khẩu-->
+    <div class="modal fade" id="modal-change-password" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <form class="modal-content" id="change-pass-form">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Đổi mật khẩu</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="change-password">
+                    <div class="mb-3 input-row">
+                        <label for="old-password" class="col-form-label">Mật khẩu cũ</label>
+                        <input type="password" id="old-password" name="old-password" class="form-control"/>
+                    </div>
+                    <div class="mb-3 input-row">
+                        <label for="new-password" class="col-form-label">Mật khẩu mới</label>
+                        <input type="password" id="new-password" name="new-password" class="form-control"/>
+                    </div>
+                    <div class="mb-3 input-row">
+                        <label for="re-password" class="col-form-label">Xác nhận mật khẩu mới</label>
+                        <input type="password" id="re-password" name="re-password" class="form-control"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" id="btn-change-password">Xác nhận</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<!-- / Main Section-->
+
+<!-- Footer -->
+<footer th:replace="~{web/footer :: #botFooter}"></footer>
+<!-- / Footer-->
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+      integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- Theme JS -->
+<!-- Vendor JS -->
+<script src="/web/js/vendor.bundle.js"></script>
+
+<!-- Theme JS -->
+<script src="/web/js/theme.bundle.js"></script>
+
+<script src="/web/custom/js/category.js"></script>
+<script src="/web/custom/js/search.js"></script>
+<script src="/web/custom/js/customer-info.js"></script>
+<script src="/admin/js/custom/validate-info.js"></script>
+
+</body>
+
+</html>

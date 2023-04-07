@@ -44,6 +44,15 @@
     </style>
   </noscript>
 
+  <style>
+    .error{
+      width: 100%;
+      color: red;
+      font-size: 15px;
+      padding-top: 10px;
+    }
+  </style>
+
   <!-- Page Title -->
   <title>HTQ Shop</title>
 
@@ -73,33 +82,32 @@
       </a>
       <!-- / Logo-->
       <div class="shadow-xl p-4 p-lg-5 bg-white">
-        <h1 class="text-center mb-5 fs-2 fw-bold">Open Account</h1>
-        <a href="#" class="btn btn-facebook d-block mb-2"><i class="ri-facebook-circle-fill align-bottom"></i> Login
-          with Facebook</a>
-        <a href="#" class="btn btn-twitter d-block mb-2"><i class="ri-twitter-fill align-bottom"></i> Login with
-          Twitter</a>
-        <span class="text-muted text-center d-block fw-bolder my-4">OR</span>
-        <form>
+        <h1 class="text-center mb-5 fs-2 fw-bold">Đăng ký</h1>
+<!--        <a href="#" class="btn btn-facebook d-block mb-2"><i class="ri-facebook-circle-fill align-bottom"></i> Login-->
+<!--          with Facebook</a>-->
+<!--        <a href="#" class="btn btn-twitter d-block mb-2"><i class="ri-twitter-fill align-bottom"></i> Login with-->
+<!--          Twitter</a>-->
+<!--        <span class="text-muted text-center d-block fw-bolder my-4">OR</span>-->
+        <form id="register-form">
           <div class="form-group">
-            <label class="form-label" for="register-fname">First name</label>
-            <input type="text" class="form-control" id="register-fname" placeholder="Enter your first name">
+            <label class="form-label" for="register-fullname">Họ tên</label>
+            <input type="text" class="form-control" name="name" id="register-fullname" placeholder="Nhập họ tên">
           </div>
           <div class="form-group">
-            <label class="form-label" for="register-lname">Last name</label>
-            <input type="text" class="form-control" id="register-lname" placeholder="Enter your last name">
+            <label class="form-label" for="register-phone">Số điện thoại</label>
+            <input type="text" class="form-control" name="phone" id="register-phone" placeholder="Nhập số điện thoại">
           </div>
           <div class="form-group">
-            <label class="form-label" for="register-email">Email address</label>
-            <input type="email" class="form-control" id="register-email" placeholder="name@email.com">
+            <label class="form-label" for="register-email">Email</label>
+            <input type="email" class="form-control" name="email" id="register-email" placeholder="Nhập email">
           </div>
           <div class="form-group">
-            <label class="form-label" for="register-password">Password</label>
-            <input type="password" class="form-control" id="register-password" placeholder="Enter your password">
+            <label class="form-label" for="register-password">Mật khẩu</label>
+            <input type="password" class="form-control" name="password" id="register-password" placeholder="Nhập mật khẩu">
           </div>
-          <button type="submit" class="btn btn-dark d-block w-100 my-4">Sign Up</button>
+          <button type="submit" class="btn btn-dark d-block w-100 my-4" id="register-btn">Đăng ký</button>
         </form>
-        <p class="d-block text-center text-muted">Already registered? <a class="text-muted" href="/shop/login">Login
-            here.</a></p>
+        <p class="d-block text-center text-muted">Đã có tài khoản? <a class="text-muted" href="/shop/login">Đăng nhập tại đây.</a></p>
       </div>
 
     </div>
@@ -109,6 +117,26 @@
   </section>
   <!-- / Main Section-->
 
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+          integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+          crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.js"
+          integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+          integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+          crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+          integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+          crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+        integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+          integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <!-- Theme JS -->
   <!-- Vendor JS -->
@@ -116,6 +144,10 @@
 
   <!-- Theme JS -->
   <script src="/web/js/theme.bundle.js"></script>
+
+  <script src="/admin/js/custom/toastr-config.js"></script>
+  <script src="/web/custom/js/validate-register.js"></script>
+  <script src="/web/custom/js/register.js"></script>
 </body>
 
 </html>
