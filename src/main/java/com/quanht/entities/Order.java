@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @AllArgsConstructor
@@ -58,6 +59,8 @@ public class Order extends BaseEntity {
 
     @PrePersist
     public void prePersist(){
+        this.setCreatedAt(LocalDateTime.now());
+        this.setUpdatedAt(LocalDateTime.now());
         this.status = OrderStatus.NEW;
         this.payment = OrderPayment.UNPAID;
         this.fulfillment = OrderFulfillment.UNFULFILLED;

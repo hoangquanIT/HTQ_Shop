@@ -7,6 +7,8 @@ $(document).ready(async function() {
     }
 })
 // ======================== GET CART ITEMS ========================
+let cartDto;
+let totalPrice = 0;
 const formatVND = (obj) => {
     obj = obj.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
     return obj;
@@ -18,6 +20,7 @@ function getCart(){
         type: 'GET',
         dataType: 'json',
         success: function(data){
+            cartDto = data;
             renderCartItem(data);
         },
         error: function(e){
@@ -28,7 +31,6 @@ function getCart(){
 
 function renderCartItem(data){
     let html = '';
-    let totalPrice = 0;
 
     if (data != null && data.items.length !== 0){
         let arr = data.items;
@@ -64,6 +66,7 @@ function renderCartItem(data){
     }
     $('#cart-items').html(html);
     $('#total-price').text(formatVND(totalPrice));
+    $('#note').text(data.note);
 }
 
 
@@ -125,4 +128,86 @@ function renderSelectedCity(value){
             element.selected = true;
         }
     })
+}
+
+// =================================== CREATE ORDER ===================================
+$('#next-to-payment').on('click', function(e){
+    e.preventDefault();
+    if ($('#checkout-form').valid()){
+        createOrder();
+        // window.location.href = "/shop/checkout/payment";
+    }
+})
+function createOrder(){
+    let cart_id = localStorage.getItem("cart_id");
+    $.ajax({
+        url: '/ecommerce/api/v1/client/checkout',
+        type: 'POST',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            'note' : $('#note').val(),
+            'total' : totalPrice,
+            'cartId' : cart_id,
+            'orderItems' : getOrderItems(),
+            'shippingAddress' : getShippingAddress()
+        }),
+        success: function(res) {
+            // localStorage.removeItem("cart_id");
+            // let myNumber = 0;
+            // localStorage.setItem('numberOfItems', myNumber.toString());
+            toastr.success("Đơn hàng được tạo thành công");
+        },
+        error: function(e){
+            toastr.error("Đã xảy ra lỗi, vui lòng thử lại");
+            console.log(e);
+        }
+    })
+}
+
+function getOrderItems(){
+    let items = cartDto.items;
+    let orderItems = [];
+
+    items.forEach(el => {
+        let obj = {
+            productId: el.productId,
+            productName: el.productName,
+            variantId: el.variant.id,
+            variantSku: el.variant.sku,
+            variantColor: el.variant.color,
+            variantSize: el.variant.size,
+            price: el.variant.price,
+            quantity: el.quantity
+        }
+        orderItems.push(obj);
+    })
+    return orderItems;
+}
+
+function getShippingAddress(){
+    return {
+        name: $("#fullNameBilling").val(),
+        phone: $("#phoneBilling").val(),
+        email: $("#emailBilling").val(),
+        address: $("#addressBilling").val(),
+        city: getMyProvince()
+    };
+}
+
+const getMyProvince = () => {
+    const provinceElement = document.querySelector("#country");
+    let pCode;
+    let pValue;
+    let provinceOptionEl = provinceElement.querySelectorAll("option");
+    provinceOptionEl.forEach(el => {
+        if(el.selected){
+            pCode = +el.value;
+            pValue = cityArr.find(proEl => proEl.code === pCode);
+        }
+    })
+    if(pValue === undefined){
+        return null;
+    }
+    return pValue.name;
 }

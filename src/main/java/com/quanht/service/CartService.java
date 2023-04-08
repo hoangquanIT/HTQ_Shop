@@ -181,4 +181,11 @@ public class CartService {
         }
     }
 
+    @Transactional
+    public void updateCartNote(Long id, String note) {
+        Cart cart = getById(id);
+        cart.setNote(note);
+        cartRepository.save(cart);
+    }
+
 }
