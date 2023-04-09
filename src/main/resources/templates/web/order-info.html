@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+
+<!-- Head -->
+
+<head>
+  <!-- Page Meta Tags-->
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="keywords" content="">
+
+  <!-- Custom Google Fonts-->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+          href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Roboto:wght@300;400;700&display=auto"
+          rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/web/img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/web/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/web/img/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/web/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- Vendor CSS -->
+  <link rel="stylesheet" href="/web/css/libs.bundle.css"/>
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="/web/css/theme.bundle.css"/>
+
+  <!-- Fix for custom scrollbar if JS is disabled-->
+  <noscript>
+    <style>
+      /**
+    * Reinstate scrolling for non-JS clients
+    */
+      .simplebar-content-wrapper {
+        overflow: auto;
+      }
+    </style>
+  </noscript>
+
+  <style>
+    .error{
+      width: 100%;
+      color: red;
+      font-size: 15px;
+      padding-top: 10px;
+    }
+  </style>
+
+  <!-- Page Title -->
+  <title>HTQ Shop</title>
+
+</head>
+
+<body class=" bg-light">
+
+<!-- Main Section-->
+<section class="mt-0 overflow-hidden d-flex justify-content-center align-items-center p-4">
+  <!-- Page Content Goes Here -->
+
+  <!-- Login Form-->
+  <div class="col col-md-8 col-lg-8 col-xxl-8">
+    <!-- Logo-->
+    <a class="navbar-brand fw-bold fs-3 flex-shrink-0 order-0 align-self-center justify-content-center d-flex mx-0 px-0"
+       href="/shop">
+      <div class="d-flex align-items-center">
+        <!-- <svg class="f-w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77.53 72.26">
+          <path
+            d="M10.43,54.2h0L0,36.13,10.43,18.06,20.86,0H41.72L10.43,54.2Zm67.1-7.83L73,54.2,68.49,62,45,48.47,31.29,72.26H20.86l-5.22-9L52.15,0H62.58l5.21,9L54.06,32.82,77.53,46.37Z"
+            fill="currentColor" fill-rule="evenodd" />
+        </svg> -->
+        <picture class="f-w-16">
+          <img class="img-fluid d-table mx-auto" src="/web/img/logos/logo.svg" alt="">
+        </picture>
+      </div>
+    </a>
+    <!-- / Logo-->
+    <div class="shadow-xl p-4 p-lg-5 bg-white">
+      <h1 class="text-center mb-5 fs-2 fw-bold">Hóa đơn</h1>
+      <ul class="list-group mb-5 d-none d-lg-block rounded-0">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div class="d-flex justify-content-start align-items-center">
+            <span class="text-muted small me-2 f-w-36 fw-bolder">Mã đơn hàng</span>
+            <span class="small" id="order-code">test</span>
+          </div>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div class="d-flex justify-content-start align-items-center">
+            <span class="text-muted small me-2 f-w-36 fw-bolder">Họ tên</span>
+            <span class="small" id="name-order">test</span>
+          </div>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div class="d-flex justify-content-start align-items-center">
+            <span class="text-muted small me-2 f-w-36 fw-bolder">Email</span>
+            <span class="small" id="email-order">test@email.com</span>
+          </div>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div class="d-flex justify-content-start align-items-center">
+            <span class="text-muted small me-2 f-w-36 fw-bolder">Số điện thoại</span>
+            <span class="small" id="phone-order">0914234122</span>
+          </div>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div class="d-flex justify-content-start align-items-center">
+            <span class="text-muted small me-2 f-w-36 fw-bolder">Giao đến</span>
+            <span class="small" id="deliver-order">123 Street, London, SM3 5TY, United Kingdom</span>
+          </div>
+        </li>
+      </ul><!-- / Checkout Information Summary-->
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+          <div class="text-bold" style="font-size: 18px;">Sản phẩm</div>
+          <hr>
+          <div class="row">
+            <div class="col-12 pt-2">
+              <table class="table">
+                <thead style="font-size: 14px; background-color: #ebeaea;">
+                  <th width="50%">Sản phẩm</th>
+                  <th>Số lượng</th>
+                  <th>Giá</th>
+                  <th>Thành tiền</th>
+                </thead>
+                <tbody class="border-0" id="order-items">
+                  <tr>
+                    <td>
+                      <!-- Cart Item-->
+                      <div class="row mx-0 g-0">
+                        <div class="col-2 position-relative">
+                          <picture class="d-block border">
+                            <img class="img-fluid"
+                                 src="/web/img/products/product-cart-2.jpg"
+                                 alt="HTML Bootstrap Template by Pixel Rocket">
+                          </picture>
+                        </div>
+                        <div class="col-9 offset-1">
+                          <div>
+                            <h6 class="justify-content-between d-flex align-items-start mb-2">
+                              Nike ZoomX Vaporfly
+                            </h6>
+                            <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size:
+                                          11 / Màu: Blue</span>
+                          </div>
+                        </div>
+                      </div> <!-- / Cart Item-->
+                    </td>
+                    <td>1</td>
+                    <td>$125.00</td>
+                    <td>$125.00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-3 row justify-content-center">
+        <div class="col-md-12">
+          <div class="text-bold" style="font-size: 18px;">Thanh toán</div>
+          <hr>
+          <div class="row">
+            <div class="col-12">
+              <div class="row">
+                <div class="col-6 text-bold">Tổng giá trị đơn hàng:
+                </div>
+                <div class="col-5 d-flex justify-content-end"
+                     id="order-total" data-total="0">
+                  $125.00
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- / Login Form-->
+
+  <!-- /Page Content -->
+</section>
+<!-- / Main Section-->
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+      integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- Theme JS -->
+<!-- Vendor JS -->
+<script src="/web/js/vendor.bundle.js"></script>
+
+<!-- Theme JS -->
+<script src="/web/js/theme.bundle.js"></script>
+
+<script src="/admin/js/custom/toastr-config.js"></script>
+<script src="/web/custom/js/order-info.js"></script>
+</body>
+
+</html>

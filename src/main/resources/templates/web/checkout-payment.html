@@ -85,24 +85,31 @@
                         <ul class="list-group mb-5 d-none d-lg-block rounded-0">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div class="d-flex justify-content-start align-items-center">
+                                    <span class="text-muted small me-2 f-w-36 fw-bolder">Họ tên</span>
+                                    <span class="small" id="name-payment">test</span>
+                                </div>
+                                <a href="/shop/checkout" class="text-muted small" role="button">Change</a>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div class="d-flex justify-content-start align-items-center">
                                     <span class="text-muted small me-2 f-w-36 fw-bolder">Email</span>
-                                    <span class="small">test@email.com</span>
+                                    <span class="small" id="email-payment">test@email.com</span>
                                 </div>
                                 <a href="/shop/checkout" class="text-muted small" role="button">Change</a>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div class="d-flex justify-content-start align-items-center">
                                     <span class="text-muted small me-2 f-w-36 fw-bolder">Số điện thoại</span>
-                                    <span class="small">0914234122</span>
+                                    <span class="small" id="phone-payment">0914234122</span>
                                 </div>
                                 <a href="/shop/checkout" class="text-muted small" role="button">Change</a>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div class="d-flex justify-content-start align-items-center">
                                     <span class="text-muted small me-2 f-w-36 fw-bolder">Giao đến</span>
-                                    <span class="small">123 Street, London, SM3 5TY, United Kingdom</span>
+                                    <span class="small" id="deliver-payment">123 Street, London, SM3 5TY, United Kingdom</span>
                                 </div>
-                                <a href="/shop/checkout/shipping" class="text-muted small" role="button">Change</a>
+                                <a href="/shop/checkout" class="text-muted small" role="button">Change</a>
                             </li>
 <!--                            <li class="list-group-item d-flex justify-content-between align-items-center">-->
 <!--                                <div class="d-flex justify-content-start align-items-center">-->
@@ -127,9 +134,9 @@
                                     <label class="form-check-label" for="checoutPaymentStripe">
                       <span class="d-flex justify-content-between align-items-start">
                         <span>
-                          <span class="mb-0 fw-bolder d-block">Credit Card (Stripe)</span>
+                          <span class="mb-0 fw-bolder d-block">Thanh toán khi giao hàng</span>
                         </span>
-                        <i class="ri-bank-card-line"></i>
+<!--                        <i class="ri-bank-card-line"></i>-->
                       </span>
                                     </label>
                                 </div>
@@ -143,9 +150,10 @@
                                     <label class="form-check-label" for="checkoutPaymentPaypal">
                       <span class="d-flex justify-content-between align-items-start">
                         <span>
-                          <span class="mb-0 fw-bolder d-block">PayPal</span>
+                          <span class="mb-0 fw-bolder d-block">Thanh toán qua VNPay</span>
                         </span>
-                        <i class="ri-paypal-line"></i>
+<!--                        <i class="ri-paypal-line"></i>-->
+                          <i class="ri-bank-card-line"></i>
                       </span>
                                     </label>
                                 </div>
@@ -154,121 +162,127 @@
                         </div>
 
                         <!-- Payment Details-->
-                        <div class="card-details">
-                            <div class="row pt-3">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="cc-name" class="form-label">Name on card</label>
-                                        <input type="text" class="form-control" id="cc-name" placeholder="" required="">
-                                        <small class="text-muted">Full name as displayed on card</small>
-                                    </div>
-                                </div>
+<!--                        <div class="card-details">-->
+<!--                            <div class="row pt-3">-->
+<!--                                <div class="col-md-12">-->
+<!--                                    <div class="form-group">-->
+<!--                                        <label for="cc-name" class="form-label">Name on card</label>-->
+<!--                                        <input type="text" class="form-control" id="cc-name" placeholder="" required="">-->
+<!--                                        <small class="text-muted">Full name as displayed on card</small>-->
+<!--                                    </div>-->
+<!--                                </div>-->
 
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="cc-number" class="form-label">Credit card number</label>
-                                        <input type="text" class="form-control" id="cc-number" placeholder=""
-                                               required="">
-                                    </div>
-                                </div>
+<!--                                <div class="col-md-12">-->
+<!--                                    <div class="form-group">-->
+<!--                                        <label for="cc-number" class="form-label">Credit card number</label>-->
+<!--                                        <input type="text" class="form-control" id="cc-number" placeholder=""-->
+<!--                                               required="">-->
+<!--                                    </div>-->
+<!--                                </div>-->
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="cc-expiration" class="form-label">Expiration</label>
-                                        <input type="text" class="form-control" id="cc-expiration" placeholder=""
-                                               required="">
-                                    </div>
-                                </div>
+<!--                                <div class="col-md-6">-->
+<!--                                    <div class="form-group">-->
+<!--                                        <label for="cc-expiration" class="form-label">Expiration</label>-->
+<!--                                        <input type="text" class="form-control" id="cc-expiration" placeholder=""-->
+<!--                                               required="">-->
+<!--                                    </div>-->
+<!--                                </div>-->
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="d-flex">
-                                            <label for="cc-cvv"
-                                                   class="form-label d-flex w-100 justify-content-between align-items-center">Security
-                                                Code</label>
-                                            <button type="button" class="btn btn-link p-0 fw-bolder fs-xs text-nowrap"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    title="A CVV is a number on your credit card or debit card that's in addition to your credit card number and expiration date">
-                                                What's this?
-                                            </button>
-                                        </div>
-                                        <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<!--                                <div class="col-md-6">-->
+<!--                                    <div class="form-group">-->
+<!--                                        <div class="d-flex">-->
+<!--                                            <label for="cc-cvv"-->
+<!--                                                   class="form-label d-flex w-100 justify-content-between align-items-center">Security-->
+<!--                                                Code</label>-->
+<!--                                            <button type="button" class="btn btn-link p-0 fw-bolder fs-xs text-nowrap"-->
+<!--                                                    data-bs-toggle="tooltip" data-bs-placement="top"-->
+<!--                                                    title="A CVV is a number on your credit card or debit card that's in addition to your credit card number and expiration date">-->
+<!--                                                What's this?-->
+<!--                                            </button>-->
+<!--                                        </div>-->
+<!--                                        <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
                         <!-- / Payment Details-->
 
                         <!-- Paypal Info-->
                         <div class="paypal-details bg-light p-4 d-none my-3 fw-bolder">
-                            Please click on complete order. You will then be transferred to Paypal to enter your payment
-                            details.
+                            Nhấn vào nút "Thanh toán online" và sau đó bạn sẽ được chuyển qua trang thanh toán của VNPay.
+                            <div class="col-md-12 mt-3">
+                                <a href="javascript:void(0)" class="btn btn-dark w-100 w-md-auto"
+                                   role="button" id="online-payment-btn">
+                                    Thanh toán online</a>
+                            </div>
                         </div>
                         <!-- /Paypal Info-->
 
                         <!-- Accept Terms Checkbox-->
-                        <div class="form-group form-check m-0">
-                            <input type="checkbox" class="form-check-input" id="accept-terms" checked>
-                            <label class="form-check-label fw-bolder" for="accept-terms">I agree to OldSkool's <a
-                                    href="#">terms &
-                                conditions</a></label>
-                        </div>
+<!--                        <div class="form-group form-check m-0">-->
+<!--                            <input type="checkbox" class="form-check-input" id="accept-terms" checked>-->
+<!--                            <label class="form-check-label fw-bolder" for="accept-terms">I agree to OldSkool's <a-->
+<!--                                    href="#">terms &-->
+<!--                                conditions</a></label>-->
+<!--                        </div>-->
 
                         <div
                                 class="pt-5 mt-5 pb-5 border-top d-flex flex-column flex-md-row justify-content-between align-items-center">
                             <a href="/shop/checkout"
                                class="btn ps-md-0 btn-link fw-bolder w-100 w-md-auto mb-2 mb-md-0"
                                role="button">Thông tin giao hàng</a>
-                            <a href="#" class="btn btn-dark w-100 w-md-auto" role="button">Đặt hàng</a>
+                            <a href="javascript:void(0)" class="btn btn-dark w-100 w-md-auto"
+                               role="button" id="order-btn">
+                                Đặt hàng</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-12 col-lg-5 bg-light pt-lg-10 aside-checkout pb-5 pb-lg-0 my-5 my-lg-0">
                 <div class="p-4 py-lg-0 pe-lg-0 ps-lg-5">
-                    <div class="pb-3">
+                    <div class="pb-3" id="cart-items">
                         <!-- Cart Item-->
-                        <div class="row mx-0 py-4 g-0 border-bottom">
-                            <div class="col-2 position-relative">
-                                <span class="checkout-item-qty">3</span>
-                                <picture class="d-block border">
-                                    <img class="img-fluid" src="/web/img/products/product-cart-1.jpg"
-                                         alt="HTML Bootstrap Template by Pixel Rocket">
-                                </picture>
-                            </div>
-                            <div class="col-9 offset-1">
-                                <div>
-                                    <h6 class="justify-content-between d-flex align-items-start mb-2">
-                                        Nike Air VaporMax 2021
-                                    </h6>
-                                    <div class="d-block text-muted fw-bolder text-uppercase fs-9">
-                                        <span id="product-size">Size: 9</span> /
-                                        <span id="product-color">Màu: Blue</span>
-                                    </div>
-                                </div>
-                                <p class="fw-bolder text-end text-muted m-0">$85.00</p>
-                            </div>
-                        </div> <!-- / Cart Item-->
-                        <!-- Cart Item-->
-                        <div class="row mx-0 py-4 g-0 border-bottom">
-                            <div class="col-2 position-relative">
-                                <span class="checkout-item-qty">3</span>
-                                <picture class="d-block border">
-                                    <img class="img-fluid" src="/web/img/products/product-cart-2.jpg"
-                                         alt="HTML Bootstrap Template by Pixel Rocket">
-                                </picture>
-                            </div>
-                            <div class="col-9 offset-1">
-                                <div>
-                                    <h6 class="justify-content-between d-flex align-items-start mb-2">
-                                        Nike ZoomX Vaporfly
-                                        <i class="ri-close-line ms-3"></i>
-                                    </h6>
-                                    <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: 11 / Qty: 1</span>
-                                </div>
-                                <p class="fw-bolder text-end text-muted m-0">$125.00</p>
-                            </div>
-                        </div> <!-- / Cart Item-->
+<!--                        <div class="row mx-0 py-4 g-0 border-bottom">-->
+<!--                            <div class="col-2 position-relative">-->
+<!--                                <span class="checkout-item-qty">3</span>-->
+<!--                                <picture class="d-block border">-->
+<!--                                    <img class="img-fluid" src="/web/img/products/product-cart-1.jpg"-->
+<!--                                         alt="HTML Bootstrap Template by Pixel Rocket">-->
+<!--                                </picture>-->
+<!--                            </div>-->
+<!--                            <div class="col-9 offset-1">-->
+<!--                                <div>-->
+<!--                                    <h6 class="justify-content-between d-flex align-items-start mb-2">-->
+<!--                                        Nike Air VaporMax 2021-->
+<!--                                    </h6>-->
+<!--                                    <div class="d-block text-muted fw-bolder text-uppercase fs-9">-->
+<!--                                        <span id="product-size">Size: 9</span> /-->
+<!--                                        <span id="product-color">Màu: Blue</span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <p class="fw-bolder text-end text-muted m-0">$85.00</p>-->
+<!--                            </div>-->
+<!--                        </div> &lt;!&ndash; / Cart Item&ndash;&gt;-->
+<!--                        &lt;!&ndash; Cart Item&ndash;&gt;-->
+<!--                        <div class="row mx-0 py-4 g-0 border-bottom">-->
+<!--                            <div class="col-2 position-relative">-->
+<!--                                <span class="checkout-item-qty">3</span>-->
+<!--                                <picture class="d-block border">-->
+<!--                                    <img class="img-fluid" src="/web/img/products/product-cart-2.jpg"-->
+<!--                                         alt="HTML Bootstrap Template by Pixel Rocket">-->
+<!--                                </picture>-->
+<!--                            </div>-->
+<!--                            <div class="col-9 offset-1">-->
+<!--                                <div>-->
+<!--                                    <h6 class="justify-content-between d-flex align-items-start mb-2">-->
+<!--                                        Nike ZoomX Vaporfly-->
+<!--                                        <i class="ri-close-line ms-3"></i>-->
+<!--                                    </h6>-->
+<!--                                    <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: 11 / Qty: 1</span>-->
+<!--                                </div>-->
+<!--                                <p class="fw-bolder text-end text-muted m-0">$125.00</p>-->
+<!--                            </div>-->
+<!--                        </div> &lt;!&ndash; / Cart Item&ndash;&gt;-->
                     </div>
 <!--                    <div class="py-4 border-bottom">-->
 <!--                        <div class="d-flex justify-content-between align-items-center mb-2">-->
@@ -286,7 +300,7 @@
                                 <p class="m-0 fw-bold fs-5">Tạm tính</p>
 <!--                                <span class="text-muted small">Inc $45.89 sales tax</span>-->
                             </div>
-                            <p class="m-0 fs-5 fw-bold">$422.99</p>
+                            <p class="m-0 fs-5 fw-bold" id="total-price">$422.99</p>
                         </div>
                     </div>
 <!--                    <div class="py-4">-->
@@ -303,6 +317,26 @@
 </section>
 <!-- / Main Section-->
 
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+      integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <!-- Theme JS -->
 <!-- Vendor JS -->
@@ -310,6 +344,8 @@
 
 <!-- Theme JS -->
 <script src="/web/js/theme.bundle.js"></script>
+
+<script src="/web/custom/js/payment.js"></script>
 </body>
 
 </html>

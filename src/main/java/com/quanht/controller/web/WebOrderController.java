@@ -6,8 +6,7 @@ import com.quanht.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,10 +22,20 @@ public class WebOrderController {
         this.cartService = cartService;
     }
 
+    @GetMapping("/ecommerce/api/v1/client/order/{cartId}")
+    public ResponseEntity<?> getOrderInfo(@PathVariable Long cartId) {
+        return ResponseEntity.ok(orderService.getClientOrderInfo(cartId));
+    }
+
     @PostMapping("/ecommerce/api/v1/client/checkout")
     public ResponseEntity<?> createOrder(HttpServletRequest request, @RequestBody OrderCreateRequest orderRequest){
         cartService.updateCartNote(orderRequest.getCartId(), orderRequest.getNote());
         return ResponseEntity.ok(orderService.createClientOrder(request, orderRequest));
+    }
+
+    @PutMapping("/ecommerce/api/v1/client/order/{orderId}")
+    public ResponseEntity<?> updateOrderPayment(@PathVariable String orderId) {
+        return ResponseEntity.ok(orderService.updateOrderPayment(orderId));
     }
 
 }

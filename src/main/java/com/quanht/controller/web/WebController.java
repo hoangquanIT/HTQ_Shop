@@ -57,6 +57,11 @@ public class WebController {
         return "web/checkout-shipping";
     }
 
+    @GetMapping("/checkout/order/{id}")
+    public String getOrderInfoAfterPayment(@PathVariable String id) {
+        return "web/order-info";
+    }
+
 
     // -------------------------------- LOGIN/REGISTER/FORGOTTEN --------------------------------
     @GetMapping("/login")

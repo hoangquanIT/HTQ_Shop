@@ -1,5 +1,7 @@
 package com.quanht.service;
 
+import com.quanht.dto.CartDto;
+import com.quanht.dto.WebOrderDto;
 import com.quanht.entities.*;
 import com.quanht.exception.BadRequestException;
 import com.quanht.exception.NotFoundException;
@@ -24,17 +26,20 @@ public class OrderService {
     private ClientJwtUtils clientJwtUtils;
     private AccountRepository accountRepository;
     private ShippingAddressRepository shippingAddressRepository;
+    private CartService cartService;
 
     @Autowired
     public OrderService(OrderRepository orderRepository, OrderItemRepository orderItemRepository,
                         VariantRepository variantRepository, ClientJwtUtils clientJwtUtils,
-                        AccountRepository accountRepository, ShippingAddressRepository shippingAddressRepository) {
+                        AccountRepository accountRepository, ShippingAddressRepository shippingAddressRepository,
+                        CartService cartService) {
         this.orderRepository = orderRepository;
         this.orderItemRepository = orderItemRepository;
         this.variantRepository = variantRepository;
         this.clientJwtUtils = clientJwtUtils;
         this.accountRepository = accountRepository;
         this.shippingAddressRepository = shippingAddressRepository;
+        this.cartService = cartService;
     }
 
     @Transactional
@@ -153,4 +158,39 @@ public class OrderService {
             });
         }
     }
+
+    public WebOrderDto getClientOrderInfo(Long cartId){
+        CartDto cartDto = cartService.getCartDto(cartId);
+        Order order = orderRepository.findByCartId(cartId).get();
+
+        return WebOrderDto.builder()
+                .orderCode(order.getId())
+                .items(cartDto.getItems())
+                .shippingAddress(order.getShippingAddress())
+                .build();
+    }
+
+    public WebOrderDto getOrderInfoAfterPayment(String orderId) {
+        Order order = orderRepository.findById(orderId).get();
+        CartDto cartDto = cartService.getCartDto(order.getCartId());
+
+        return WebOrderDto.builder()
+                .orderCode(orderId)
+                .items(cartDto.getItems())
+                .shippingAddress(order.getShippingAddress())
+                .build();
+    }
+
+    @Transactional
+    public Order updateOrderPayment(String orderId) {
+        Order order = orderRepository.findById(orderId).get();
+
+        order.setPayment(OrderPayment.PAID);
+        order.setStatus(OrderStatus.CONFIRMED);
+
+        orderRepository.save(order);
+
+        return order;
+    }
+
 }

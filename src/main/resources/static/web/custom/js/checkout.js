@@ -135,7 +135,7 @@ $('#next-to-payment').on('click', function(e){
     e.preventDefault();
     if ($('#checkout-form').valid()){
         createOrder();
-        // window.location.href = "/shop/checkout/payment";
+        window.location.href = "/shop/checkout/payment";
     }
 })
 function createOrder(){
