@@ -23,6 +23,15 @@
     <!-- Custom styles for this page -->
     <link href="/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+    <style>
+        .error{
+            width: 100%;
+            color: red;
+            font-size: 15px;
+            padding-top: 10px;
+        }
+    </style>
+
 </head>
 
 <body id="page-top">
@@ -87,19 +96,19 @@
                                                                 <div class="col-6 py-1">
                                                                     <label>Tên khách hàng:</label>
                                                                 </div>
-                                                                <div class="col-6 py-1">
+                                                                <div class="col-6 py-1" id="account-name">
 
                                                                 </div>
                                                                 <div class="col-6 py-1">
                                                                     <label>Email:</label>
                                                                 </div>
-                                                                <div class="col-6 py-1">
+                                                                <div class="col-6 py-1" id="account-email">
 
                                                                 </div>
                                                                 <div class="col-6 py-1">
                                                                     <label>Số điện thoại:</label>
                                                                 </div>
-                                                                <div class="col-6 py-1">
+                                                                <div class="col-6 py-1" id="account-phone">
 
                                                                 </div>
                                                             </div>
@@ -109,13 +118,13 @@
                                                                 <div class="col-6 py-1">
                                                                     <label>Tỉnh/Thành phố:</label>
                                                                 </div>
-                                                                <div class="col-6 py-1">
+                                                                <div class="col-6 py-1" id="account-city">
 
                                                                 </div>
                                                                 <div class="col-6 py-1">
                                                                     <label>Địa chỉ:</label>
                                                                 </div>
-                                                                <div class="col-6 py-1">
+                                                                <div class="col-6 py-1" id="account-address">
 
                                                                 </div>
                                                             </div>
@@ -143,19 +152,19 @@
                                                                 <div class="col-6 py-1">
                                                                     <label>Tên người nhận:</label>
                                                                 </div>
-                                                                <div class="col-6 py-1">
+                                                                <div class="col-6 py-1" id="shipping-name">
 
                                                                 </div>
                                                                 <div class="col-6 py-1">
                                                                     <label>Email:</label>
                                                                 </div>
-                                                                <div class="col-6 py-1">
+                                                                <div class="col-6 py-1" id="shipping-email">
 
                                                                 </div>
                                                                 <div class="col-6 py-1">
                                                                     <label>Số điện thoại:</label>
                                                                 </div>
-                                                                <div class="col-6 py-1">
+                                                                <div class="col-6 py-1" id="shipping-phone">
 
                                                                 </div>
                                                             </div>
@@ -165,13 +174,13 @@
                                                                 <div class="col-6 py-1">
                                                                     <label>Tỉnh/Thành phố:</label>
                                                                 </div>
-                                                                <div class="col-6 py-1">
+                                                                <div class="col-6 py-1" id="shipping-city">
 
                                                                 </div>
                                                                 <div class="col-6 py-1">
                                                                     <label>Địa chỉ:</label>
                                                                 </div>
-                                                                <div class="col-6 py-1">
+                                                                <div class="col-6 py-1" id="shipping-address">
 
                                                                 </div>
                                                             </div>
@@ -225,7 +234,7 @@
                                                                 </div>
                                                                 <div class="col-6 d-flex justify-content-center"
                                                                     id="order-total" data-total="0">
-                                                                    <div></div>
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -266,9 +275,9 @@
                                                                     style="width: 80%;">
                                                                     <option value="UNPAID">Chưa thanh toán</option>
                                                                     <option value="PAID">Đã thanh toán</option>
-                                                                    <option value="REFUNDED">Hoàn trả</option>
-                                                                    <option value="PARTIALLY_REFUND">Hoàn trả một phần
-                                                                    </option>
+<!--                                                                    <option value="REFUNDED">Hoàn trả</option>-->
+<!--                                                                    <option value="PARTIALLY_REFUND">Hoàn trả một phần-->
+<!--                                                                    </option>-->
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -316,7 +325,7 @@
                 <!-- chỉnh sửa địa chỉ nhận hàng -->
                 <div class="modal fade" id="modal-update-shipping" style="display: none;" aria-hidden="true">
                     <div class="modal-dialog">
-                        <form class="modal-content">
+                        <form class="modal-content" id="shipping-address-form">
                             <div class="modal-header">
                                 <h4 class="modal-title">Thông tin giao hàng</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -326,19 +335,22 @@
                             <div class="modal-body">
                                 <div class="form-group input-row pt-2">
                                     <label for="updateName">Họ và tên</label>
-                                    <input type="text" class="form-control" id="updateName" placeholder="Enter name">
+                                    <input type="text" class="form-control" id="updateName" name="updateName"
+                                           placeholder="Enter name">
                                 </div>
                                 <div class="form-group input-row pt-2">
                                     <label for="updatePhone">Số điện thoại</label>
-                                    <input type="text" class="form-control" id="updatePhone" placeholder="Enter phone">
+                                    <input type="text" class="form-control" id="updatePhone" name="updatePhone"
+                                           placeholder="Enter phone">
                                 </div>
                                 <div class="form-group input-row pt-2">
                                     <label for="updateEmail">Email</label>
-                                    <input type="email" class="form-control" id="updateEmail" placeholder="Enter email">
+                                    <input type="email" class="form-control" id="updateEmail" name="updateEmail"
+                                           placeholder="Enter email">
                                 </div>
                                 <div class="form-group input-row pt-2">
                                     <label for="updateAddress">Địa chỉ</label>
-                                    <input type="text" class="form-control" id="updateAddress"
+                                    <input type="text" class="form-control" id="updateAddress" name="updateAddress"
                                         placeholder="Enter address">
                                 </div>
                                 <div class="form-group pt-2">
@@ -414,6 +426,31 @@
 
     <!-- Page level custom scripts -->
     <script src="/admin/js/demo/datatables-demo.js"></script>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!--    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"-->
+    <!--            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"-->
+    <!--            crossorigin="anonymous"></script>-->
+    <!--    <script src="https://code.jquery.com/jquery-3.6.3.js"-->
+    <!--            integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+          integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+            integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="/admin/js/custom/toastr-config.js"></script>
+    <script src="/admin/js/custom/order.js"></script>
+    <script src="/admin/js/custom/validate-update-shippingAddress.js"></script>
 
 </body>
 

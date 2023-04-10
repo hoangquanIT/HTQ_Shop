@@ -49,4 +49,10 @@ public class WebCustomerController {
     public ResponseEntity<?> getCustomerCart(HttpServletRequest request){
         return ResponseEntity.ok(accountService.getClientCartNumbers(request));
     }
+
+    @PutMapping("/ecommerce/api/v1/client/account/cart")
+    public ResponseEntity<?> updateCustomerCart(HttpServletRequest httpRequest){
+        accountService.updateCustomerCart(httpRequest);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -1,12 +1,14 @@
 package com.quanht.service;
 
 import com.quanht.dto.CartDto;
+import com.quanht.dto.OrderDto;
 import com.quanht.dto.WebOrderDto;
 import com.quanht.entities.*;
 import com.quanht.exception.BadRequestException;
 import com.quanht.exception.NotFoundException;
 import com.quanht.repositories.*;
 import com.quanht.request.OrderCreateRequest;
+import com.quanht.request.OrderUpdateRequest;
 import com.quanht.security.ClientJwtUtils;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +43,43 @@ public class OrderService {
         this.accountRepository = accountRepository;
         this.shippingAddressRepository = shippingAddressRepository;
         this.cartService = cartService;
+    }
+
+    public List<OrderDto> getAllOrders() {
+        List<Order> orders = orderRepository.findAll();
+        List<OrderDto> orderDtos = new ArrayList<>();
+
+        orders.forEach(order -> {
+            OrderDto orderDto = new OrderDto();
+            orderDto.setId(order.getId());
+            orderDto.setCustomerName(order.getShippingAddress().getName());
+            orderDto.setCreatedAt(order.getCreatedAt());
+            orderDto.setTotal(order.getTotal());
+            orderDto.setStatus(order.getStatus().getCode());
+            orderDto.setPayment(order.getPayment().getCode());
+            orderDto.setFulfillment(order.getFulfillment().getCode());
+
+            orderDtos.add(orderDto);
+        });
+
+        return orderDtos;
+    }
+
+    public Order getOrder(String id) {
+        return orderRepository.findById(id).orElseThrow(() -> {
+            throw new NotFoundException("Đơn hàng không tồn tại");
+        });
+    }
+
+    @Transactional
+    public void updateOrder(String id, OrderUpdateRequest request) {
+        Order order = getOrder(id);
+        order.setStatus(OrderStatus.valueOf(request.getStatus()));
+        order.setPayment(OrderPayment.valueOf(request.getPayment()));
+        order.setFulfillment(OrderFulfillment.valueOf(request.getFulfillment()));
+        order.setNote(request.getNote());
+
+        orderRepository.save(order);
     }
 
     @Transactional

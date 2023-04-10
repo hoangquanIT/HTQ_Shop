@@ -270,4 +270,13 @@ public class AccountService implements UserDetailsService {
                 updateCustomer.getAddress(), updateCustomer.getCityCode(), LocalDateTime.now());
     }
 
+    @Transactional
+    public void updateCustomerCart(HttpServletRequest request) {
+        Account account = getClientDetail(request);
+
+        account.setCurrentCartId(null);
+
+        accountRepository.save(account);
+    }
+
 }

@@ -85,8 +85,23 @@ public class AuthController {
 
     @GetMapping("/ecommerce/api/v1/client/auth/confirm")
     public String confirm(@RequestParam("token") String token) {
-        authService.confirmToken(token);
-        return "/web/confirm-token";
+        try {
+            authService.confirmToken(token);
+            return "/web/confirm-token";
+        } catch (Exception e) {
+            return "/web/resend-token";
+        }
+    }
+
+    @PostMapping("/ecommerce/api/v1/client/auth/resend-token")
+    public ResponseEntity<?> resendToken(@RequestBody RegisterRequest request) {
+        return ResponseEntity.ok(authService.generateTokenAndSendMail(request.getEmail()));
+    }
+
+    @GetMapping("/ecommerce/api/v1/client/auth/reset-password/{email}")
+    public ResponseEntity<?> resetPassword(@PathVariable String email) {
+        authService.resetPasswordAndSendMail(email);
+        return ResponseEntity.noContent().build();
     }
 
 }

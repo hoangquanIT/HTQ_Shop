@@ -1,6 +1,9 @@
 $(document).ready(function() {
     getOrderInfo();
     checkOnlinePayment();
+    if (localStorage.getItem('firstLogin') !== null) {
+        updateAccountInfo();
+    }
 })
 
 // ======================== GET ORDER INFO ========================
@@ -109,6 +112,20 @@ function updateOrderPayment() {
     $.ajax({
         url: `/ecommerce/api/v1/client/order/${orderCode}`,
         type: 'PUT',
+        dataType: 'json',
+        success: function(res) {
+            console.log("success");
+        },
+        error: function(e) {
+            console.log(e);
+        }
+    })
+}
+
+function updateAccountInfo() {
+    $.ajax({
+        url : '/ecommerce/api/v1/client/account/cart',
+        type : 'PUT',
         dataType: 'json',
         success: function(res) {
             console.log("success");

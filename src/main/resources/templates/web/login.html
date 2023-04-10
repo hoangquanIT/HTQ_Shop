@@ -100,6 +100,10 @@
             </label>
             <input type="password" class="form-control" id="login-password" name="login-password" placeholder="Nhập mật khẩu">
           </div>
+          <div style="display: none;" id="resend">
+            Tài khoản của bạn chưa được xác thực. Vui lòng vào mail để xác thực tài khoản hoặc gửi lại mã xác thực
+            <a href="javascript:void(0)" id="resend-token">Tại đây</a>
+          </div>
           <button type="submit" class="btn btn-dark d-block w-100 my-4" id="login-btn">Đăng nhập</button>
         </form>
         <p class="d-block text-center text-muted">Bạn là khách hàng mới? <a class="text-muted" href="/shop/register">Đăng ký tại đây</a></p>

@@ -15,6 +15,7 @@ import com.quanht.request.RegisterRequest;
 import com.quanht.security.ClientJwtUtils;
 import com.quanht.security.JwtUtils;
 import com.quanht.utils.Constant;
+import com.quanht.utils.PasswordGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -119,6 +120,10 @@ public class AuthService {
             // Trả về token cho client
             return token;
         } catch (Exception ex) {
+            Optional<Account> account = accountRepository.findByEmail(request.getEmail());
+            if (account.isPresent()) {
+                throw new BadRequestException("Tài khoản của bạn chưa được xác thực");
+            }
             throw new BadRequestException("Email hoặc mật khẩu không chính xác");
         }
     }
@@ -164,7 +169,7 @@ public class AuthService {
     }
 
     // SINH TOKEN - SEND MAIL
-    private Account generateTokenAndSendMail(String email) {
+    public Account generateTokenAndSendMail(String email) {
         Account account = accountRepository.findByEmail(email).get();
 
         // Sinh ra token
@@ -219,6 +224,26 @@ public class AuthService {
         accountRepository.save(account);
 
         return "confirmed";
+    }
+
+    public void resetPasswordAndSendMail(String email) {
+        Account account = accountRepository.findByEmail(email).orElseThrow(() -> {
+            throw new BadRequestException("Email này chưa được đăng ký tài khoản");
+        });
+
+        String newPassword = PasswordGenerator.generatePassword();
+        // Mã hóa password
+        String passwordEncode = passwordEncoder.encode(newPassword);
+
+        account.setPassword(passwordEncode);
+        accountRepository.save(account);
+
+        // Gửi email
+        try {
+            mailService.sendResetPasswordMail(email, "Reset mật khẩu", newPassword);
+        } catch (MailjetSocketTimeoutException | MailjetException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public String logout(HttpSession session) {

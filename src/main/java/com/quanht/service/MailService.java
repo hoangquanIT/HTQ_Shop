@@ -225,4 +225,22 @@ public class MailService {
         mailjetClient.post(request);
     }
 
+    public String resetPasswordContent(String password) {
+        return "Đây là mật khẩu mới của bạn: " + password;
+    }
+
+    public void sendResetPasswordMail(String to, String subject, String password) throws MailjetException, MailjetSocketTimeoutException {
+        MailjetRequest request = new MailjetRequest(Emailv31.resource)
+                .property(Emailv31.MESSAGES, new JSONArray()
+                        .put(new JSONObject()
+                                .put(Emailv31.Message.FROM, new JSONObject()
+                                        .put("Email", Constant.EMAIL_FROM))
+                                .put(Emailv31.Message.TO, new JSONArray()
+                                        .put(new JSONObject()
+                                                .put("Email", to)))
+                                .put(Emailv31.Message.SUBJECT, subject)
+                                .put(Emailv31.Message.HTMLPART, resetPasswordContent(password))));
+        mailjetClient.post(request);
+    }
+
 }
