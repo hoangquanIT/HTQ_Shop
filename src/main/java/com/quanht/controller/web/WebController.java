@@ -36,6 +36,16 @@ public class WebController {
         return "web/customer-info";
     }
 
+    @GetMapping("/orders")
+    public String getOrders() {
+        return "web/orders";
+    }
+
+    @GetMapping("/orders/{id}")
+    public String getOrders(@PathVariable String id) {
+        return "web/order";
+    }
+
     @GetMapping("/unauthorized")
     public String getUnauthorizedPage(){
         return "admin/access-denied";

@@ -65,6 +65,28 @@ public class OrderService {
         return orderDtos;
     }
 
+    public List<OrderDto> getAllOrdersByCustomer(HttpServletRequest request) {
+        Account customer = getCustomer(request);
+        List<Order> orders = orderRepository.findByAccountId(customer.getId());
+
+        List<OrderDto> orderDtos = new ArrayList<>();
+
+        orders.forEach(order -> {
+            OrderDto orderDto = new OrderDto();
+            orderDto.setId(order.getId());
+            orderDto.setCustomerName(null);
+            orderDto.setCreatedAt(order.getCreatedAt());
+            orderDto.setTotal(order.getTotal());
+            orderDto.setStatus(order.getStatus().getCode());
+            orderDto.setPayment(order.getPayment().getCode());
+            orderDto.setFulfillment(order.getFulfillment().getCode());
+
+            orderDtos.add(orderDto);
+        });
+
+        return orderDtos;
+    }
+
     public Order getOrder(String id) {
         return orderRepository.findById(id).orElseThrow(() -> {
             throw new NotFoundException("Đơn hàng không tồn tại");

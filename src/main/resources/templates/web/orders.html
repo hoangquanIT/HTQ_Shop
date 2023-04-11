@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<!-- Head -->
+
+<head>
+    <!-- Page Meta Tags-->
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+
+    <!-- Custom Google Fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+            href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Roboto:wght@300;400;700&display=auto"
+            rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/web/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/web/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/web/img/favicon/favicon-16x16.png">
+    <link rel="mask-icon" href="/web/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="/web/css/libs.bundle.css"/>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="/web/css/theme.bundle.css"/>
+
+    <!-- Custom styles for this page -->
+    <link href="/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+    <!-- Fix for custom scrollbar if JS is disabled-->
+    <noscript>
+        <style>
+            /**
+          * Reinstate scrolling for non-JS clients
+          */
+            .simplebar-content-wrapper {
+                overflow: auto;
+            }
+        </style>
+    </noscript>
+
+    <style>
+        .error {
+            width: 100%;
+            color: red;
+            font-size: 15px;
+            padding-top: 10px;
+        }
+    </style>
+
+    <!-- Page Title -->
+    <title>HTQ Shop</title>
+
+</head>
+
+<body class="">
+
+<!-- Navbar -->
+<!-- Navbar -->
+<nav th:replace="~{web/menu :: #topMenu}"></nav>
+<!-- / Navbar--> <!-- / Navbar-->
+
+<!-- Main Section-->
+<section class="mt-0 row">
+    <div class="col-1"></div>
+    <div class="shadow-xl p-4 p-lg-5 bg-white col-10">
+        <h1 class="text-center mb-5 fs-2 fw-bold">Danh sách đơn hàng</h1>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Mã đơn hàng</th>
+                            <th>Ngày tạo</th>
+                            <th>Giá trị</th>
+                            <th>Trạng thái</th>
+                            <th>Thanh toán</th>
+                            <th>Vận chuyển</th>
+                        </tr>
+                        </thead>
+                        <tbody id="orders">
+                        <tr>
+                            <td><a href="/admin/order">1</a></td>
+                            <td>02-02-2022</td>
+                            <td>150000 VNĐ</td>
+                            <td>Hoàn tất</td>
+                            <td>Đã thanh toán</td>
+                            <td>Đang vận chuyển</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- / Main Section-->
+
+<!-- Footer -->
+<footer th:replace="~{web/footer :: #botFooter}"></footer>
+<!-- / Footer-->
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+      integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- Theme JS -->
+<!-- Vendor JS -->
+<script src="/web/js/vendor.bundle.js"></script>
+
+<!-- Theme JS -->
+<script src="/web/js/theme.bundle.js"></script>
+
+<!-- Page level plugins -->
+<script src="/admin/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="/admin/js/demo/datatables-demo.js"></script>
+
+<script src="/web/custom/js/category.js"></script>
+<script src="/web/custom/js/search.js"></script>
+<script src="/web/custom/js/orders.js"></script>
+
+</body>
+
+</html>

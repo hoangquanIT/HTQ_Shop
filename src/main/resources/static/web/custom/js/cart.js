@@ -63,15 +63,25 @@ function changeBtn (obj) {
 }
 
 $(document).ready(function() {
-    getCart();
+    let cartId = localStorage.getItem('cart_id');
+    if (cartId !== null) {
+        getCart(cartId);
+    } else {
+        let html = '<h6 class="mt-3">Giỏ hàng của bạn đang trống</h6>';
+        $('#checkout-link').removeAttr('href');
+        $('#payment-link').removeAttr('href');
+        $('#next-to-checkout').removeAttr('href').attr('style', 'cursor:not-allowed');
+        $('#cart-items').html(html);
+        $('#total-price').text(formatVND(0));
+    }
+
 })
 // ========================== GET CART INFO ==========================
 const formatVND = (obj) => {
     obj = obj.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
     return obj;
 }
-function getCart(){
-    let cartId = localStorage.getItem('cart_id');
+function getCart(cartId){
     $.ajax({
         url: `/ecommerce/api/v1/client/cart/${cartId}`,
         type: 'GET',
@@ -88,6 +98,7 @@ function getCart(){
 function renderCartItem(data){
     let html = '';
     let totalPrice = 0;
+    console.log(data);
     if (data != null && data.items.length !== 0){
         let arr = data.items;
         arr.forEach(obj => {

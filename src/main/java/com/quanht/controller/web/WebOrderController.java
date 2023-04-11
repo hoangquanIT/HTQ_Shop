@@ -22,6 +22,11 @@ public class WebOrderController {
         this.cartService = cartService;
     }
 
+    @GetMapping("/ecommerce/api/v1/client/orders")
+    public ResponseEntity<?> getAllOrdersByCustomer(HttpServletRequest request) {
+        return ResponseEntity.ok(orderService.getAllOrdersByCustomer(request));
+    }
+
     @GetMapping("/ecommerce/api/v1/client/order/{cartId}")
     public ResponseEntity<?> getOrderInfo(@PathVariable Long cartId) {
         return ResponseEntity.ok(orderService.getClientOrderInfo(cartId));
