@@ -1,11 +1,32 @@
 package com.quanht.entities;
 
+import com.quanht.dto.AccountDto;
+import com.quanht.dto.StatisticsDto;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+
+@NamedNativeQuery(
+        name = "statistics",
+        query = "SELECT MONTH(updated_at) AS months, SUM(total) AS total " +
+                "FROM orders o " +
+                "WHERE payment = 'PAID' AND YEAR(updated_at) = YEAR(CURDATE()) " +
+                "GROUP BY MONTH(updated_at)",
+        resultSetMapping = "StatisticsDto"
+)
+@SqlResultSetMapping(
+        name = "StatisticsDto",
+        classes = @ConstructorResult(
+                targetClass = StatisticsDto.class,
+                columns = {
+                        @ColumnResult(name = "months", type = Integer.class),
+                        @ColumnResult(name = "total", type = Double.class)
+                }
+        )
+)
 
 @AllArgsConstructor
 @NoArgsConstructor

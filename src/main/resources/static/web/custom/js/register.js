@@ -5,6 +5,7 @@ $('#register-btn').on('click', function(e){
     }
 })
 function registerClient(){
+    let baseUrl = window.location.origin;
     $.ajax({
         url: '/ecommerce/api/v1/client/auth/register',
         type: 'POST',
@@ -14,7 +15,8 @@ function registerClient(){
             'name' : $('#register-fullname').val(),
             'phone' : $('#register-phone').val(),
             'email' : $('#register-email').val(),
-            'password' : $('#register-password').val()
+            'password' : $('#register-password').val(),
+            'baseUrl' : baseUrl
         }),
         success: function(res){
             toastr.success("Link kích hoạt đã được gửi tới email của bạn.");

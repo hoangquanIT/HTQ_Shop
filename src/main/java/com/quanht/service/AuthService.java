@@ -141,7 +141,7 @@ public class AuthService {
             if (!account.getEnabled()
                     && account.getName().equals(request.getName())
                     && account.getEmail().equals(request.getEmail())) {
-                return generateTokenAndSendMail(account.getEmail());
+                return generateTokenAndSendMail(account.getEmail(), request.getBaseUrl());
             }
 
             throw new BadRequestException("Email = " + request.getEmail() + " đã tồn tại");
@@ -165,11 +165,11 @@ public class AuthService {
         accountRepository.save(newAccount);
 
         // Sinh ra token
-        return generateTokenAndSendMail(newAccount.getEmail());
+        return generateTokenAndSendMail(newAccount.getEmail(), request.getBaseUrl());
     }
 
     // SINH TOKEN - SEND MAIL
-    public Account generateTokenAndSendMail(String email) {
+    public Account generateTokenAndSendMail(String email, String baseUrl) {
         Account account = accountRepository.findByEmail(email).get();
 
         // Sinh ra token
@@ -185,7 +185,7 @@ public class AuthService {
         tokenRepository.save(token);
 
         // Gửi email
-        String link = "http://localhost:8080/ecommerce/api/v1/client/auth/confirm?token=" + tokenString;
+        String link = baseUrl + "/ecommerce/api/v1/client/auth/confirm?token=" + tokenString;
         try {
             mailService.sendEmail(account.getEmail(), "Xác thực tài khoản", link);
         } catch (MailjetSocketTimeoutException | MailjetException e) {

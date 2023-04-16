@@ -95,7 +95,7 @@ public class AuthController {
 
     @PostMapping("/ecommerce/api/v1/client/auth/resend-token")
     public ResponseEntity<?> resendToken(@RequestBody RegisterRequest request) {
-        return ResponseEntity.ok(authService.generateTokenAndSendMail(request.getEmail()));
+        return ResponseEntity.ok(authService.generateTokenAndSendMail(request.getEmail(), request.getBaseUrl()));
     }
 
     @GetMapping("/ecommerce/api/v1/client/auth/reset-password/{email}")

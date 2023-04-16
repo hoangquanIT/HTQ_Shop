@@ -80,6 +80,7 @@ $('#online-payment-btn').on('click', function() {
 })
 
 function createPayment() {
+    let baseUrl = window.location.origin;
     $.ajax({
         url: '/ecommerce/api/v1/client/payment',
         type: 'POST',
@@ -87,7 +88,8 @@ function createPayment() {
         contentType: 'application/json',
         data: JSON.stringify({
             'orderId' : orderCode,
-            'total' : totalPrice
+            'total' : totalPrice,
+            'baseUrl' : baseUrl
         }),
         success: function(data) {
             window.location.href = data.url;

@@ -11,5 +11,6 @@ public class PaymentRequest {
 
     private String orderId;
     private Double total;
+    private String baseUrl;
 
 }

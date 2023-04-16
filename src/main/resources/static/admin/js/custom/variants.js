@@ -47,7 +47,7 @@ function renderVariants(data){
                 "render": function (data, type, row) {
                     return `
                         <a href="javascript:void(0)" class="card-link" data-toggle="modal"
-                            data-target="#modal-update-${data}" onclick="getOneVariant(${data})">Cập nhật
+                            data-target="#modal-update-${data}" onclick="getOneVariant(${data})">Update
                         </a>
                         <!-- Update modal-->
                         <div class="modal fade" id="modal-update-${data}" style="display: none;"

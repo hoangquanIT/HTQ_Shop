@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
@@ -53,7 +54,7 @@ public class WebPaymentController {
         vnp_Params.put("vnp_OrderType", orderType);
         vnp_Params.put("vnp_Locale", "vn");
 
-        vnp_Params.put("vnp_ReturnUrl", "http://localhost:8080/shop/checkout/order/" + request.getOrderId());
+        vnp_Params.put("vnp_ReturnUrl", request.getBaseUrl() + "/shop/checkout/order/" + request.getOrderId());
         vnp_Params.put("vnp_IpAddr", vnp_IpAddr);
 
 

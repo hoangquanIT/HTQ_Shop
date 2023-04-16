@@ -2,6 +2,7 @@ package com.quanht.service;
 
 import com.quanht.dto.CartDto;
 import com.quanht.dto.OrderDto;
+import com.quanht.dto.StatisticsDto;
 import com.quanht.dto.WebOrderDto;
 import com.quanht.entities.*;
 import com.quanht.exception.BadRequestException;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -93,6 +95,11 @@ public class OrderService {
         });
     }
 
+    public List<Order> getOrdersByCustomerId(Long customerId) {
+        Account customer = accountRepository.findById(customerId).get();
+        return  orderRepository.findByAccountId(customer.getId());
+    }
+
     @Transactional
     public void updateOrder(String id, OrderUpdateRequest request) {
         Order order = getOrder(id);
@@ -100,6 +107,7 @@ public class OrderService {
         order.setPayment(OrderPayment.valueOf(request.getPayment()));
         order.setFulfillment(OrderFulfillment.valueOf(request.getFulfillment()));
         order.setNote(request.getNote());
+        order.setUpdatedAt(LocalDateTime.now());
 
         orderRepository.save(order);
     }
@@ -253,6 +261,18 @@ public class OrderService {
         orderRepository.save(order);
 
         return order;
+    }
+
+    public List<StatisticsDto> getTotalEachMonth() {
+        return orderRepository.getTotalSumEachMonth();
+    }
+
+    public Long countNewOrders() {
+        return orderRepository.countNewOrder();
+    }
+
+    public Long countTotalOrdersCurMonth() {
+        return orderRepository.countTotalOrderCurrentMonth();
     }
 
 }

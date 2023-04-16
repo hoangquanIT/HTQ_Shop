@@ -5,6 +5,7 @@ import com.quanht.entities.Product;
 import com.quanht.exception.BadRequestException;
 import com.quanht.exception.NotFoundException;
 import com.quanht.repositories.CategoryRepository;
+import com.quanht.repositories.ProductCategoryRepository;
 import com.quanht.repositories.ProductRepository;
 import com.quanht.request.CategoryRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +24,14 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
 
     private ProductRepository productRepository;
+    private ProductCategoryRepository productCategoryRepository;
 
     @Autowired
-    public CategoryService(CategoryRepository categoryRepository, ProductRepository productRepository) {
+    public CategoryService(CategoryRepository categoryRepository, ProductRepository productRepository,
+                           ProductCategoryRepository productCategoryRepository) {
         this.categoryRepository = categoryRepository;
         this.productRepository = productRepository;
+        this.productCategoryRepository = productCategoryRepository;
     }
 
     public List<Category> getCategories(){
@@ -65,6 +69,7 @@ public class CategoryService {
 
     @Transactional
     public void deleteCategory(Long id){
+        productCategoryRepository.deleteByCategoryId(id);
         categoryRepository.deleteById(id);
     }
 

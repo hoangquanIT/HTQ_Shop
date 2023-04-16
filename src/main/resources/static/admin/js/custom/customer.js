@@ -1,6 +1,7 @@
 $(document).ready(async function() {
     await getCity();
     await getCustomer();
+    getOrders();
 })
 
 // ================================= GET CITY =================================
@@ -100,3 +101,41 @@ $('#btn-update-customer').on('click', function(e){
         updateCustomer();
     }
 })
+
+// ======================== GET ORDERS ========================
+const formatVND = (obj) => {
+    obj = obj.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+    return obj;
+}
+
+function getOrders() {
+    $.ajax({
+        url: `/ecommerce/api/v1/order/customer/${cusId}`,
+        type: "GET",
+        dataType: "json",
+        success: function(data){
+            if ($.fn.DataTable.isDataTable('#dataTable')) {
+                $('#dataTable').DataTable().clear().destroy();
+            }
+            renderOrders(data);
+        },
+        error: function(e){
+            toastr.error(e.responseJSON.message);
+        }
+    })
+}
+
+function renderOrders(data) {
+    $('#dataTable').DataTable({
+        "columns": [
+            {"data": "id"},
+            {"data": "createdAt"},
+            {
+                "data": "total",
+                "render": function(data, type, row, meta) {
+                    return formatVND(data);
+                }
+            }
+        ]
+    }).rows.add(data).draw();
+}

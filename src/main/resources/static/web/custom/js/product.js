@@ -363,9 +363,9 @@ function renderImage(data){
 
 
 // =============================== ADD TO CART ===============================
-const addToCart = () => {
+const addToCart = async () => {
     let cart_id = localStorage.getItem("cart_id");
-    $.ajax({
+    await $.ajax({
         url: "/ecommerce/api/v1/client/cart",
         type: "POST",
         dataType: "json",
@@ -399,3 +399,16 @@ function renderCartItemsNumber(res){
     localStorage.setItem('numberOfItems', cart_items_number.toString());
     renderCartNumber();
 }
+
+async function buyNow() {
+    await addToCart();
+    await redirectToCheckout();
+}
+
+function redirectToCheckout() {
+    window.location.href = "/shop/checkout";
+}
+
+$('#buy-now-btn').on('click', function() {
+    buyNow();
+})

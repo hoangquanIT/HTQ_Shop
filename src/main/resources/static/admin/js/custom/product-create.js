@@ -89,6 +89,9 @@ $('#create-product').on('click', function(e){
     if ($('#result').val() == ''){
         toastr.error("Cần phải thêm ít nhất 1 ảnh");
     }
+    else if ($('#variants').children().length === 0){
+        toastr.error("Cần phải thêm ít nhất 1 phiên bản sản phẩm");
+    }
     else if ($('#basic-info-product').valid()){
         createProduct();
     }

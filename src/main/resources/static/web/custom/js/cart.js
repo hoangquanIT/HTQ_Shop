@@ -98,7 +98,6 @@ function getCart(cartId){
 function renderCartItem(data){
     let html = '';
     let totalPrice = 0;
-    console.log(data);
     if (data != null && data.items.length !== 0){
         let arr = data.items;
         arr.forEach(obj => {
@@ -171,7 +170,7 @@ function renderCartItem(data){
         html = '<h6 class="mt-3">Giỏ hàng của bạn đang trống</h6>';
         $('#checkout-link').removeAttr('href');
         $('#payment-link').removeAttr('href');
-        $('#next-to-checkout').removeAttr('href');
+        $('#next-to-checkout').removeAttr('href').attr('style', 'cursor:not-allowed');
     }
     $('#cart-items').html(html);
     $('#total-price').text(formatVND(totalPrice));
@@ -214,7 +213,8 @@ function deleteCartItem(id, variantId){
             let currentQty = parseInt(localStorage.getItem('numberOfItems'));
             localStorage.setItem('numberOfItems', (currentQty - quantity).toString());
             toastr.success("Sản phẩm đã được xóa khỏi giỏ hàng");
-            getCart();
+            let cartId = localStorage.getItem('cart_id');
+            getCart(cartId);
             $('body').removeClass('modal-open');
             $('.modal-backdrop').hide();
         },

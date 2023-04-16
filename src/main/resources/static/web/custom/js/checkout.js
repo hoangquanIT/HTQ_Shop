@@ -131,16 +131,22 @@ function renderSelectedCity(value){
 }
 
 // =================================== CREATE ORDER ===================================
-$('#next-to-payment').on('click', function(e){
+let orderCode;
+$('#next-to-payment').on('click', async function(e){
     e.preventDefault();
     if ($('#checkout-form').valid()){
-        createOrder();
-        window.location.href = "/shop/checkout/payment";
+        await createOrder();
+        setTimeout(await function() {
+            localStorage.removeItem("cart_id");
+            let myNumber = 0;
+            localStorage.setItem('numberOfItems', myNumber.toString());
+            window.location.href = "/shop/checkout/order/" + orderCode;
+        }, 3000);
     }
 })
-function createOrder(){
+async function createOrder(){
     let cart_id = localStorage.getItem("cart_id");
-    $.ajax({
+    await $.ajax({
         url: '/ecommerce/api/v1/client/checkout',
         type: 'POST',
         dataType: 'json',
@@ -153,10 +159,8 @@ function createOrder(){
             'shippingAddress' : getShippingAddress()
         }),
         success: function(res) {
-            // localStorage.removeItem("cart_id");
-            // let myNumber = 0;
-            // localStorage.setItem('numberOfItems', myNumber.toString());
             toastr.success("Đơn hàng được tạo thành công");
+            orderCode = res.id;
         },
         error: function(e){
             toastr.error("Đã xảy ra lỗi, vui lòng thử lại");
@@ -210,4 +214,33 @@ const getMyProvince = () => {
         return null;
     }
     return pValue.name;
+}
+
+$('#online-payment-btn').on('click', async function(e) {
+    e.preventDefault();
+    if ($('#checkout-form').valid()){
+        await createOrder();
+        await createPayment();
+    }
+})
+
+function createPayment() {
+    let baseUrl = window.location.origin;
+    $.ajax({
+        url: '/ecommerce/api/v1/client/payment',
+        type: 'POST',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            'orderId' : orderCode,
+            'total' : totalPrice,
+            'baseUrl' : baseUrl
+        }),
+        success: function(data) {
+            window.location.href = data.url;
+        },
+        error: function(e) {
+            console.log(e);
+        }
+    })
 }

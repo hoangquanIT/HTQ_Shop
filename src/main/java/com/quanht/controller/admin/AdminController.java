@@ -1,17 +1,32 @@
 package com.quanht.controller.admin;
 
+import com.quanht.security.JwtUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 
+    private JwtUtils jwtUtils;
+
+    @Autowired
+    public AdminController(JwtUtils jwtUtils) {
+        this.jwtUtils = jwtUtils;
+    }
+
     @GetMapping("")
-    public String getAdminLogin(){
-        return "admin/login";
+    public String getAdminLogin(HttpServletRequest request){
+        if (jwtUtils.getTokenFromCookie(request) != null) {
+            return "redirect:admin/dashboard";
+        } else {
+            return "admin/login";
+        }
     }
 
     @GetMapping("/dashboard")

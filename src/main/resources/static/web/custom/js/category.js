@@ -64,8 +64,11 @@ async function getCartNumberInfo(){
                 })
                 localStorage.setItem('cart_id', data.id);
             } else {
-                deleteCart();
-                localStorage.removeItem("cart_id");
+                let id = localStorage.getItem('cart_id');
+                if (id !== null) {
+                    deleteCart();
+                    localStorage.removeItem("cart_id");
+                }
             }
             localStorage.setItem('numberOfItems', count.toString());
         },
