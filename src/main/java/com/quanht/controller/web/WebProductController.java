@@ -23,4 +23,9 @@ public class WebProductController {
 
     }
 
+    @GetMapping("/ecommerce/api/v1/client/product/similar/{keyword}")
+    public ResponseEntity<?> getSimilarProducts(@PathVariable String keyword) {
+        return ResponseEntity.ok(productService.getSimilarProducts(keyword));
+    }
+
 }

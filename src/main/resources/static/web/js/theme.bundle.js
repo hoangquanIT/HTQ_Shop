@@ -149,16 +149,25 @@
                 const c = Object(a.a)(e, t, {placement: "bottom-end"});
 
                 function o() {
-                    t.setAttribute("data-show", ""), c.setOptions({
-                        modifiers: [{
-                            name: "eventListeners",
-                            enabled: !0
-                        }]
-                    }), c.update()
+                    if (t !== null) {
+                        t.setAttribute("data-show", ""), c.setOptions({
+                            modifiers: [{
+                                name: "eventListeners",
+                                enabled: !0
+                            }]
+                        }), c.update()
+                    }
                 }
 
                 function r() {
-                    t.removeAttribute("data-show"), c.setOptions({modifiers: [{name: "eventListeners", enabled: !1}]})
+                    if (t !== null) {
+                        t.removeAttribute("data-show"), c.setOptions({
+                            modifiers: [{
+                                name: "eventListeners",
+                                enabled: !1
+                            }]
+                        })
+                    }
                 }
 
                 function s(t) {

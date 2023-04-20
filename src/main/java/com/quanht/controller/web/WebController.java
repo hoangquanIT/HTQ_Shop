@@ -19,7 +19,7 @@ public class WebController {
     }
 
     @GetMapping("/product/{id}")
-    public String getProductPage(@PathVariable Long id){
+    public String getProductPage(@PathVariable String id){
         return "web/product";
     }
 

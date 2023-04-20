@@ -56,7 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/roles", "/admin/employees", "/admin/employee/**",
                         "/ecommerce/api/v1/employee/**", "/ecommerce/api/v1/roles/**")
                 .hasRole("ADMIN")
-                .antMatchers("/admin/**", "/ecommerce/api/v1/**")
+                .antMatchers("/admin/**", "/ecommerce/api/v1/**", "/ecommerce/api/v1/employee/**")
                 .hasAnyRole("ADMIN", "EMPLOYEE")
 //                .antMatchers("/admin/products/**", "/admin/product/**", "/api/v1/**",
 //                        "/admin/categories/**", "/admin/variants", "/admin/detail/**")
@@ -77,6 +77,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPointCustom)
                 .accessDeniedHandler(accessDeniedHandlerCustom)
+//                .accessDeniedPage("/admin/unauthorized")
                 .and()
                 .logout()
                     //.logoutUrl("/admin/logout")

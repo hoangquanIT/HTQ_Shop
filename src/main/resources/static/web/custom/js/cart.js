@@ -95,6 +95,18 @@ function getCart(cartId){
     })
 }
 
+function encodeId(id) {
+    let characters = '0123456789abcdef';
+    let result = '';
+    let charactersLength = characters.length;
+    while (result.length < 10) {
+        let randomChar = characters.charAt(Math.floor(Math.random() * charactersLength));
+        result += randomChar;
+    }
+
+    return result + id.toString(16).padStart(6, '0');
+}
+
 function renderCartItem(data){
     let html = '';
     let totalPrice = 0;
@@ -115,7 +127,7 @@ function renderCartItem(data){
                     <div class="col-9 offset-1">
                         <div>
                             <h6 class="justify-content-between d-flex align-items-start mb-2">
-                                <a href="/shop/product/${obj.productId}">${obj.productName}</a>
+                                <a href="/shop/product/${encodeId(obj.productId)}">${obj.productName}</a>
                                 <button type="button" 
                                     data-toggle="modal" data-target="#modal-delete-${obj.itemId}">
                                     <span>×</span>

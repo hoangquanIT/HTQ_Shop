@@ -49,6 +49,10 @@ public class ProductService {
         });
     }
 
+    public List<Product> getSimilarProducts(String keyword) {
+        return productRepository.findByNameContainingIgnoreCase(keyword);
+    }
+
     @Transactional
     public Product createProduct(MultipartFile[] files, String product){
         try {

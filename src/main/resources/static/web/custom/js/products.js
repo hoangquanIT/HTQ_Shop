@@ -61,7 +61,7 @@ function renderProductList(data){
 <!--                        </div>-->
                     </div>
                     <div class="card-body px-0">
-                        <a class="text-decoration-none link-cover" href="/shop/product/${el.id}">${el.name}</a>
+                        <a class="text-decoration-none link-cover" href="/shop/product/${encodeId(el.id)}">${el.name}</a>
                         <p class="mt-2 mb-0 small">${renderProductPrice(el)}</p>
                     </div>
                 </div>
@@ -70,6 +70,18 @@ function renderProductList(data){
         `;
     })
     $('#product-list').html(html);
+}
+
+function encodeId(id) {
+    let characters = '0123456789abcdef';
+    let result = '';
+    let charactersLength = characters.length;
+    while (result.length < 10) {
+        let randomChar = characters.charAt(Math.floor(Math.random() * charactersLength));
+        result += randomChar;
+    }
+
+    return result + id.toString(16).padStart(6, '0');
 }
 
 function renderProductPrice(data){
@@ -85,8 +97,9 @@ function renderPagination(data){
     let totalPage = pageInfo.totalPages;
     let html = `<li class="page-item ${currentPage === 1 ? 'disabled' : ''}" id="prev-page">
                     <a class="page-link" href="javascript:void(0)" aria-label="Previous" onclick="changePage(${currentPage - 1})">
-                      <span aria-hidden="true"><i class="bi bi-chevron-left"></i></span>
-                       <span class="sr-only">Prev</span> 
+<!--                      <span aria-hidden="true"><i class="bi bi-chevron-left"></i></span>-->
+<!--                       <span class="sr-only">Prev</span> -->
+                        Prev
                     </a>
                 </li>`;
     for (let i = 1; i <= totalPage; i++) {
@@ -96,8 +109,9 @@ function renderPagination(data){
     }
     html += `<li class="page-item ${currentPage === totalPage ? 'disabled' : ''}" id="next-page">
                 <a class="page-link" href="javascript:void(0)" aria-label="Next" onclick="changePage(${currentPage + 1})">
-                  <span aria-hidden="true"><i class="bi bi-chevron-right"></i></span>
-                   <span class="sr-only">Next</span>
+<!--                  <span aria-hidden="true"><i class="bi bi-chevron-right"></i></span>-->
+<!--                   <span class="sr-only">Next</span>-->
+                    Next
                 </a>
              </li>`;
     $("#product-pagination").html(html);

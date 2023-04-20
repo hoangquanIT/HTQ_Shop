@@ -133,6 +133,7 @@ function changeBtn (obj) {
 $(document).ready(async function() {
     await getProduct();
     // await getQtyBox();
+    await getRelatedProducts();
 })
 
 // =========================== GET PRODUCT ===========================
@@ -140,6 +141,7 @@ const pathname = window.location.pathname.split("/");
 const productId = pathname[pathname.length-1];
 let product_data;
 let variant_id;
+let product_name;
 
 // format sang tiền Việt
 const formatVND = (obj) => {
@@ -147,9 +149,14 @@ const formatVND = (obj) => {
     return obj;
 }
 
+function decodeId() {
+    return parseInt(productId.slice(-6), 16);
+}
+
 async function getProduct(){
+    let id = decodeId();
     await $.ajax({
-        url: `/ecommerce/api/v1/client/product/${productId}`,
+        url: `/ecommerce/api/v1/client/product/${id}`,
         type: 'GET',
         dataType: 'json',
         success: function(data){
@@ -164,6 +171,7 @@ async function getProduct(){
 
 function renderProduct(data){
     $('#product-name').text(data.name);
+    product_name = data.name;
     $('#product-price').text(renderPrice(data));
     $('#product-content').text(data.content);
     $('#product-description').text(data.description);
@@ -412,3 +420,108 @@ function redirectToCheckout() {
 $('#buy-now-btn').on('click', function() {
     buyNow();
 })
+
+
+// =========================== RENDER SIMILAR PRODUCTS =========================
+
+function getRelatedProducts() {
+    let arr = product_name.split(' ');
+    let keyword = arr[0] + ' ' + arr[1];
+    $.ajax({
+        url: `/ecommerce/api/v1/client/product/similar/${keyword}`,
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            renderRelatedProducts(data);
+        },
+        error: function(e) {
+            console.log(e)
+        }
+    })
+}
+
+function encodeId(id) {
+    let characters = '0123456789abcdef';
+    let result = '';
+    let charactersLength = characters.length;
+    while (result.length < 10) {
+        let randomChar = characters.charAt(Math.floor(Math.random() * charactersLength));
+        result += randomChar;
+    }
+
+    return result + id.toString(16).padStart(6, '0');
+}
+
+function renderRelatedProducts(data) {
+    let html = '';
+    if (data != null) {
+        data.forEach(el => {
+            if (el.name !== product_name) {
+                let img = el.images[0];
+                html += `
+                    <div class="swiper-slide col-12 col-sm-6 col-lg-3">
+                        <!-- Card Product-->
+                        <div
+                            class="card border border-transparent position-relative overflow-hidden h-100 transparent">
+                            <div class="card-img position-relative">
+                                <div class="card-badges">
+                                    <span class="badge badge-card"><span
+                                            class="f-w-2 f-h-2 bg-success rounded-circle d-block me-1"></span>
+                                        New In</span>
+                                </div>
+    <!--                            <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i-->
+    <!--                                    class="ri-heart-line"></i></span>-->
+                                <picture class="position-relative overflow-hidden d-block bg-light">
+                                    <img class="w-100 img-fluid position-relative z-index-10" title="" src="${img.url}" alt="">
+                                </picture>
+    <!--                            <div class="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">-->
+    <!--                                <button class="btn btn-quick-add"><i class="ri-add-line me-2"></i> Quick-->
+    <!--                                    Add</button>-->
+    <!--                            </div>-->
+                            </div>
+                            <div class="card-body px-0">
+                                <a class="text-decoration-none link-cover" href="/shop/product/${encodeId(el.id)}">${el.name}</a>
+                                <p class="mt-2 mb-0 small">${renderProductPrice(el)}</p>
+                            </div>
+                        </div>
+                        <!--/ Card Product-->
+                    </div>
+                `;
+            }
+        });
+    }
+    if (html === '') {
+        $('#related-area').css('display', 'none');
+    } else {
+        $('#related-products').append(html);
+        let mySwiper = new Swiper('.swiper-container', {
+            spaceBetween: 10,
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false
+            },
+            navigation: {
+                nextEl: '.swiper-next',
+                prevEl: '.swiper-prev'
+            },
+            breakpoints: {
+                600: {
+                    slidesPerView: 2
+                },
+                1024: {
+                    slidesPerView: 3
+                },
+                1400: {
+                    slidesPerView: 4
+                }
+            }
+        });
+    }
+}
+
+function renderProductPrice(data){
+    let arr = data.variants;
+    let price = arr[0].price;
+    return formatVND(price);
+}
