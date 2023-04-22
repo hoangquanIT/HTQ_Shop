@@ -47,3 +47,23 @@ $('#register-form').validate({
         $(element).removeClass('error');
     }
 })
+
+$('#forgot-form').validate({
+    rules: {
+        "email" : {
+            required: true,
+            email: true,
+        }
+    },
+    messages: {
+        "email" : {
+            required: "Email không được để trống",
+        }
+    },
+    highlight: function (element) {
+        $(element).removeClass('error');
+    },
+    unhighlight: function (element) {
+        $(element).removeClass('error');
+    }
+})
