@@ -29,13 +29,15 @@ $('#login-btn').on('click', function(e){
 })
 
 $('#resend-token').on('click', function() {
+    let baseUrl = window.location.origin;
     $.ajax({
         type: 'POST',
         url: '/ecommerce/api/v1/client/auth/resend-token',
         contentType: 'application/json',
         data: JSON.stringify({
             'email' : $('#login-email').val(),
-            'password' : $('#login-password').val()
+            'password' : $('#login-password').val(),
+            'baseUrl' : baseUrl
         }),
         success: function(res) {
             toastr.success("Gửi lại mail xác nhận thành công");

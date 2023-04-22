@@ -1,11 +1,12 @@
-$('#login-form').validate({
+$('#login-form, #forgot-form').validate({
     rules: {
         "login-email" : {
             required: true,
         },
         "login-password" : {
             required: true,
-        }
+        },
+
     },
     messages: {
         "login-email" : {
