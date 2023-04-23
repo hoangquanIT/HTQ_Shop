@@ -50,7 +50,7 @@ function addEmp(){
             'roles' : getRolesChosen()
         }),
         success: function (res) {
-            toastr.success("Add Employee successfully");
+            toastr.success("Thêm nhân viên thành công");
             getEmployees();
         },
         error: function(e){

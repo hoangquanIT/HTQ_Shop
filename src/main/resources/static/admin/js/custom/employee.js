@@ -41,7 +41,7 @@ function updateEmp(){
             'phone': $('#emp-phone').val(),
         }),
         success: function(res){
-            toastr.success("Update Employee successfully");
+            toastr.success("Cập nhật thông tin nhân viên thành công");
         },
         error: function(e){
             toastr.error(e.responseJSON.message);
@@ -64,7 +64,7 @@ function deleteEmployee(){
         type: 'DELETE',
         dataType: 'json',
         success: function(res){
-            toastr.success("Delete Employee successfully");
+            toastr.success("Xóa nhân viên thành công");
         },
         error: function(e){
             toastr.error(e.responseJSON.message);

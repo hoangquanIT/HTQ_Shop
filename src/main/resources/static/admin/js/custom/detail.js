@@ -40,7 +40,7 @@ function updateInfo(){
             'phone' : $('#info-phone').val()
         }),
         success: function(res){
-            toastr.success("Update Information successfully");
+            toastr.success("Cập nhật thông tin thành công");
         },
         error: function(e){
             toastr.error(e.responseJSON.message);
@@ -67,7 +67,7 @@ function updatePassword(){
             'newPassword' : $('#new-password').val()
         }),
         success: function(res){
-            toastr.success("Update Password successfully");
+            toastr.success("Cập nhật mật khẩu thành công");
         },
         error: function(e){
             toastr.error(e.responseJSON.message);

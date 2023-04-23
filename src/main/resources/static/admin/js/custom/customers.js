@@ -48,7 +48,7 @@ function addCustomer(){
             'cityCode': getChoseCityCode(),
         }),
         success: function(res){
-            toastr.success("Add Customer successfully");
+            toastr.success("Thêm khách hàng thành công");
             getCustomers();
         },
         error: function(e){

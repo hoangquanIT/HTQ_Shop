@@ -83,7 +83,7 @@ function updateCustomer(){
             'cityCode' : getCitySelected(),
         }),
         success: function(res){
-            toastr.success("Update Customer successfully");
+            toastr.success("Cập nhật thông tin khách hàng thành công");
         },
         error: function(e){
             toastr.error(e.responseJSON.message);

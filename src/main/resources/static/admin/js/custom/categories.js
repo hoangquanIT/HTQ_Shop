@@ -16,7 +16,7 @@ function addCategory() {
             'description': $('#createDescription').val()
         }),
         success: function(res){
-            toastr.success("Add Category successfully");
+            toastr.success("Thêm nhóm sản phẩm thành công");
             getCategories();
         },
         error: function(e){
@@ -200,7 +200,7 @@ function updateCategory(id){
             'description': descriptionUpdateEl
         }),
         success: function(data){
-            toastr.success("Update Category successfully");
+            toastr.success("Cập nhật nhóm sản phẩm thành công");
             getCategories();
         },
         error: function(e){
@@ -226,7 +226,7 @@ function deleteCategory(id){
         type: 'DELETE',
         dataType: 'json',
         success: function(res){
-            toastr.success("Delete Category successfully");
+            toastr.success("Xóa nhóm sản phẩm thành công");
             getCategories();
         },
         error: function(e){

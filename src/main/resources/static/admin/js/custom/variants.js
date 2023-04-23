@@ -174,7 +174,7 @@ function updateVariant(id){
             'quantity' : $(`#updateQuantity-${id}`).val(),
         }),
         success: function(res){
-            toastr.success("Update Variant successfully");
+            toastr.success("Cập nhật phiên bản sản phẩm thành công");
             $('body').removeClass('modal-open');
             $('.modal-backdrop').hide();
             getVariants();
@@ -206,7 +206,7 @@ function deleteVariant(id){
         type: 'DELETE',
         dataType: 'json',
         success: function(res){
-            toastr.success("Delete Variant successfully");
+            toastr.success("Xóa phiên bản sản phẩm thành công");
             $('body').removeClass('modal-open');
             $('.modal-backdrop').hide();
             getVariants();

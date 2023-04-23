@@ -116,7 +116,7 @@ function createProduct(){
             formData.delete("file[]")
             formData.delete("product")
             window.location.href = "/admin/products";
-            toastr.success("Add Product successfully");
+            toastr.success("Thêm sản phẩm thành công");
         },
         error: function(e){
             toastr.error(e.responseJSON.message);

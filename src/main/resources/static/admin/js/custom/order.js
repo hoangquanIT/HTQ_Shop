@@ -170,7 +170,7 @@ function updateShippingAddress() {
             'city' : getCityName($('#select-province option:selected').val()),
         }),
         success: function (data) {
-            toastr.success("Update Shipping address successfully");
+            toastr.success("Cập nhật thông tin người nhận thành công");
             renderShippingAddress(data);
             $('body').removeClass('modal-open');
             $('.modal').modal('hide');
@@ -207,7 +207,7 @@ function updateOrder() {
             'fulfillment' : $('#select-fulfillment option:selected').val(),
         }),
         success: function(res) {
-            toastr.success("Update Order successfully");
+            toastr.success("Cập nhật trạng thái đơn hàng thành công");
         },
         error: function(e) {
             toastr.error(e.responseJSON.message);

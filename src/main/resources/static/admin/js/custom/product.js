@@ -50,7 +50,6 @@ function getProduct(){
         type: "GET",
         dataType: "json",
         success: function(data){
-            console.log(data);
             productObj = data;
             renderProduct(data);
         },
@@ -151,7 +150,7 @@ function removeVariant(id){
             productObj.variants = productObj.variants.filter(el => el.id !== id);
             const removeEl = document.getElementById(`${id}`);
             removeEl.remove();
-            toastr.success("Delete Variant successfully");
+            toastr.success("Xóa phiên bản sản phẩm thành công");
             //$('.modal').modal('hide');
             $('body').removeClass('modal-open');
             $('.modal-backdrop').hide();
@@ -178,7 +177,7 @@ function createVariant(){
         }),
         success: function(res){
             console.log(res);
-            toastr.success("Add Variant successfully");
+            toastr.success("Thêm phiên bản sản phẩm thành công");
             productObj.variants.push(res);
             console.log(productObj);
             renderVariants(productObj.variants);
@@ -238,7 +237,7 @@ function removeImgProduct(id){
         success: function(res){
             productObj.images = productObj.images.filter(el => el.id !== id)
             renderImg(productObj.images)
-            toastr.success("Delete Image successfully");
+            toastr.success("Xóa ảnh thành công");
         },
         error: function(e){
             toastr.error(e.responseJSON.message);
@@ -270,7 +269,7 @@ function addImage(formData){
                 productObj.images.push(newImg);
             })
             renderImg(productObj.images);
-            toastr.success("Add Image successfully");
+            toastr.success("Thêm ảnh thành công");
         },
         error: function(e){
             toastr.error(e.responseJSON.message);
@@ -300,7 +299,7 @@ function updateProduct(){
             'categoryIds' : getChosenCategories()
         }),
         success: function(res){
-            toastr.success("Update Product successfully");
+            toastr.success("Cập nhật sản phẩm thành công");
         },
         error: function(e){
             toastr.error(e.responseJSON.message);
@@ -334,7 +333,7 @@ function deleteProduct(){
         dataType: 'json',
         success: function(res){
             window.location.href = "/admin/products";
-            toastr.success("Delete Product successfully");
+            toastr.success("Xóa sản phẩm thành công");
         },
         error: function(e){
             toastr.error(e.responseJSON.message);
