@@ -205,7 +205,7 @@ const updateCart = (variantId, quantity) => {
         success: function (res){
             let currentQty = parseInt(localStorage.getItem('numberOfItems'));
             localStorage.setItem('numberOfItems', (currentQty + quantity).toString());
-            getCart();
+            getCart(cart_id);
         },
         error: function (e){
             console.log(e);
