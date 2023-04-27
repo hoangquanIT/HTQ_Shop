@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -71,6 +72,12 @@ public class AuthService {
             // Tiến hành xác thực
             Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
+            if (authentication.getAuthorities()
+                    .stream()
+                    .anyMatch(authority -> authority.equals(new SimpleGrantedAuthority("ROLE_CUSTOMER")))) {
+                throw new BadRequestException("Bạn không có quyền truy cập trang này");
+            }
+
             // Lưu trữ thông tin của đối tượng đã đăng nhập
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -102,6 +109,12 @@ public class AuthService {
             // Tiến hành xác thực
             Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
+            if (authentication.getAuthorities()
+                    .stream()
+                    .noneMatch(authority -> authority.equals(new SimpleGrantedAuthority("ROLE_CUSTOMER")))) {
+                throw new BadRequestException("Bạn không có quyền truy cập trang này");
+            }
+
             // Lưu trữ thông tin của đối tượng đã đăng nhập
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -120,8 +133,12 @@ public class AuthService {
             // Trả về token cho client
             return token;
         } catch (Exception ex) {
+            if (("Bạn không có quyền truy cập trang này").equals(ex.getMessage())) {
+                throw new BadRequestException("Email hoặc mật khẩu không chính xác");
+            }
             Optional<Account> account = accountRepository.findByEmail(request.getEmail());
-            if (account.isPresent()) {
+
+            if (account.isPresent() && passwordEncoder.matches(account.get().getPassword(), request.getPassword())) {
                 throw new BadRequestException("Tài khoản của bạn chưa được xác thực");
             }
             throw new BadRequestException("Email hoặc mật khẩu không chính xác");

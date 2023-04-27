@@ -127,9 +127,10 @@
               <th:block sec:authorize="hasRole('CUSTOMER')">
 <!--                <a class="nav-link text-body"  href="/shop/account">Tài khoản</a>/-->
                 <div class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                  <a class="nav-link text-body dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown"
                      aria-expanded="false">
-                    Tài khoản
+                    <i class="ri-account-circle-fill" style="font-size: 25px;"></i>
+                    <span>Tài khoản</span>
                   </a>
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="/shop/account">Thông tin cá nhân</a></li>

@@ -90,12 +90,15 @@ function renderCartNumber(){
     }
 }
 
+// ===================== LOGOUT ======================
 $('#btn-logout').on('click', function(){
-    let myNumber = 0;
-    localStorage.setItem('numberOfItems', myNumber.toString());
-    localStorage.removeItem("cart_id");
-    localStorage.removeItem("firstLogin");
-    window.location.href = "/client/logout";
+    if (window.confirm('Bạn có chắc muốn đăng xuất chứ?')) {
+        let myNumber = 0;
+        localStorage.setItem('numberOfItems', myNumber.toString());
+        localStorage.removeItem("cart_id");
+        localStorage.removeItem("firstLogin");
+        window.location.href = "/client/logout";
+    }
 })
 
 function deleteCart(){

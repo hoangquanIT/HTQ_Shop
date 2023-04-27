@@ -1,11 +1,22 @@
 package com.quanht.controller.web;
 
+import com.quanht.security.ClientJwtUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/shop")
 public class WebController {
+
+    private ClientJwtUtils clientJwtUtils;
+
+    @Autowired
+    public WebController(ClientJwtUtils clientJwtUtils) {
+        this.clientJwtUtils = clientJwtUtils;
+    }
 
     // -------------------------------- SHOP --------------------------------
     @GetMapping("")
@@ -29,13 +40,21 @@ public class WebController {
     }
 
     @GetMapping("/account")
-    public String getCustomerDetails(){
-        return "web/customer-info";
+    public String getCustomerDetails(HttpServletRequest request){
+        if (clientJwtUtils.getTokenFromCookie(request) != null) {
+            return "web/customer-info";
+        } else {
+            return "redirect:login";
+        }
     }
 
     @GetMapping("/orders")
-    public String getOrders() {
-        return "web/orders";
+    public String getOrders(HttpServletRequest request) {
+        if (clientJwtUtils.getTokenFromCookie(request) != null) {
+            return "web/orders";
+        } else {
+            return "redirect:login";
+        }
     }
 
     @GetMapping("/orders/{id}")
@@ -72,18 +91,30 @@ public class WebController {
 
     // -------------------------------- LOGIN/REGISTER/FORGOTTEN --------------------------------
     @GetMapping("/login")
-    public String getLoginPage(){
-        return "web/login";
+    public String getLoginPage(HttpServletRequest request){
+        if (clientJwtUtils.getTokenFromCookie(request) != null) {
+            return "redirect:";
+        } else {
+            return "web/login";
+        }
     }
 
     @GetMapping("/register")
-    public String getRegisterPage(){
-        return "web/register";
+    public String getRegisterPage(HttpServletRequest request){
+        if (clientJwtUtils.getTokenFromCookie(request) != null) {
+            return "redirect:";
+        } else {
+            return "web/register";
+        }
     }
 
     @GetMapping("/forgotPassword")
-    public String getForgottenPasswordPage(){
-        return "web/forgotten-password";
+    public String getForgottenPasswordPage(HttpServletRequest request){
+        if (clientJwtUtils.getTokenFromCookie(request) != null) {
+            return "redirect:";
+        } else {
+            return "web/forgotten-password";
+        }
     }
 
 }

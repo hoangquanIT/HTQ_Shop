@@ -114,29 +114,29 @@ public class OrderService {
 
     @Transactional
     public Order createClientOrder(HttpServletRequest request, OrderCreateRequest orderRequest) {
-        Optional<Order> oldOrder = orderRepository.findByCartId(orderRequest.getCartId());
-        if (oldOrder.isPresent()) {
-            Order newOrder = oldOrder.get();
-            newOrder.setNote(orderRequest.getNote());
-            newOrder.setTotal(orderRequest.getTotal());
-            orderRepository.save(newOrder);
-
-            createOderItem(newOrder, orderRequest, false);
-
-            Optional<ShippingAddress> oldShippingAddress = shippingAddressRepository
-                    .findById(newOrder.getShippingAddress().getId());
-            if (oldShippingAddress.isPresent()) {
-                ShippingAddress newAddress = oldShippingAddress.get();
-                newAddress.setName(orderRequest.getShippingAddress().getName());
-                newAddress.setPhone(orderRequest.getShippingAddress().getPhone());
-                newAddress.setEmail(orderRequest.getShippingAddress().getEmail());
-                newAddress.setAddress(orderRequest.getShippingAddress().getAddress());
-                newAddress.setCity(orderRequest.getShippingAddress().getCity());
-                shippingAddressRepository.save(newAddress);
-            }
-
-            return newOrder;
-        } else {
+//        Optional<Order> oldOrder = orderRepository.findByCartId(orderRequest.getCartId());
+//        if (oldOrder.isPresent()) {
+//            Order newOrder = oldOrder.get();
+//            newOrder.setNote(orderRequest.getNote());
+//            newOrder.setTotal(orderRequest.getTotal());
+//            orderRepository.save(newOrder);
+//
+//            createOderItem(newOrder, orderRequest, false);
+//
+//            Optional<ShippingAddress> oldShippingAddress = shippingAddressRepository
+//                    .findById(newOrder.getShippingAddress().getId());
+//            if (oldShippingAddress.isPresent()) {
+//                ShippingAddress newAddress = oldShippingAddress.get();
+//                newAddress.setName(orderRequest.getShippingAddress().getName());
+//                newAddress.setPhone(orderRequest.getShippingAddress().getPhone());
+//                newAddress.setEmail(orderRequest.getShippingAddress().getEmail());
+//                newAddress.setAddress(orderRequest.getShippingAddress().getAddress());
+//                newAddress.setCity(orderRequest.getShippingAddress().getCity());
+//                shippingAddressRepository.save(newAddress);
+//            }
+//
+//            return newOrder;
+//        } else {
             Order order = Order.builder()
                     .note(orderRequest.getNote())
                     .total(orderRequest.getTotal())
@@ -145,14 +145,14 @@ public class OrderService {
                     .build();
             orderRepository.save(order);
 
-            createOderItem(order, orderRequest, true);
+            createOderItem(order, orderRequest);
 
             ShippingAddress shippingAddress = orderRequest.getShippingAddress();
             shippingAddress.setOrder(order);
             shippingAddressRepository.save(shippingAddress);
 
             return order;
-        }
+//        }
     }
 
     public Account getCustomer(HttpServletRequest request){
@@ -178,55 +178,55 @@ public class OrderService {
     }
 
     @Transactional
-    public void createOderItem(Order order, OrderCreateRequest orderRequest, Boolean isNew){
-        if (!isNew) {
-            List<OrderItem> orderItems = orderRequest.getOrderItems();
-            List<OrderItem> oldItems = order.getOrderItems();
-            int numberOfNewItems = orderItems.size();
-            int numberOfOldItems = oldItems.size();
-
-            OrderItem newItem = null;
-            OrderItem oldItem = null;
-            boolean check = true;
-            for (int i = 0; i < numberOfNewItems; i++) {
-                newItem = orderItems.get(i);
-                check = true;
-                for (int j = 0; j < numberOfOldItems; j++) {
-                    oldItem = orderItemRepository.findById(oldItems.get(j).getId()).orElse(null);
-                    if (oldItem != null && oldItem.getVariantId() == newItem.getVariantId()) {
-                        oldItem.setQuantity(newItem.getQuantity());
-                        orderItemRepository.save(oldItem);
-                        check = false;
-                        break;
-                    }
-                }
-                if (check) {
-                    newItem.setOrder(order);
-                    orderItemRepository.save(newItem);
-                }
-            }
-
-            for (int i = 0; i < numberOfOldItems; i++) {
-                oldItem = oldItems.get(i);
-                check = false;
-                for (int j = 0; j < numberOfNewItems; j++) {
-                    newItem = orderItems.get(j);
-                    if (oldItem.getVariantId() == newItem.getVariantId()) {
-                        check = true;
-                        break;
-                    }
-                }
-                if (!check) {
-                    orderItemRepository.customDeleteById(oldItem.getId());
-                }
-            }
-        } else {
+    public void createOderItem(Order order, OrderCreateRequest orderRequest){
+//        if (!isNew) {
+//            List<OrderItem> orderItems = orderRequest.getOrderItems();
+//            List<OrderItem> oldItems = order.getOrderItems();
+//            int numberOfNewItems = orderItems.size();
+//            int numberOfOldItems = oldItems.size();
+//
+//            OrderItem newItem = null;
+//            OrderItem oldItem = null;
+//            boolean check = true;
+//            for (int i = 0; i < numberOfNewItems; i++) {
+//                newItem = orderItems.get(i);
+//                check = true;
+//                for (int j = 0; j < numberOfOldItems; j++) {
+//                    oldItem = orderItemRepository.findById(oldItems.get(j).getId()).orElse(null);
+//                    if (oldItem != null && oldItem.getVariantId() == newItem.getVariantId()) {
+//                        oldItem.setQuantity(newItem.getQuantity());
+//                        orderItemRepository.save(oldItem);
+//                        check = false;
+//                        break;
+//                    }
+//                }
+//                if (check) {
+//                    newItem.setOrder(order);
+//                    orderItemRepository.save(newItem);
+//                }
+//            }
+//
+//            for (int i = 0; i < numberOfOldItems; i++) {
+//                oldItem = oldItems.get(i);
+//                check = false;
+//                for (int j = 0; j < numberOfNewItems; j++) {
+//                    newItem = orderItems.get(j);
+//                    if (oldItem.getVariantId() == newItem.getVariantId()) {
+//                        check = true;
+//                        break;
+//                    }
+//                }
+//                if (!check) {
+//                    orderItemRepository.customDeleteById(oldItem.getId());
+//                }
+//            }
+//        } else {
             List<OrderItem> orderItems = orderRequest.getOrderItems();
             orderItems.forEach(item -> {
                 item.setOrder(order);
                 orderItemRepository.save(item);
             });
-        }
+//        }
     }
 
     public WebOrderDto getClientOrderInfo(Long cartId){

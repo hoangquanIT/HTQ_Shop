@@ -1,7 +1,12 @@
+jQuery.validator.addMethod("email", function (value, element) {
+    return this.optional(element) || /^[a-zA-Z][\w]+@([\w]+\.[\w]{2,}|[\w]+\.[\w]{2,}\.[\w]{2,})$/.test(value);
+}, "Email không đúng định dạng");
+
 $('#login-form').validate({
     rules: {
         "login-email" : {
             required: true,
+            email: true
         },
         "login-password" : {
             required: true,
