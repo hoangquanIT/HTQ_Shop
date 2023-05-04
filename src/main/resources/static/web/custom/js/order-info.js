@@ -104,6 +104,10 @@ function checkOnlinePayment() {
             localStorage.setItem('numberOfItems', myNumber.toString());
             localStorage.removeItem("cart_id");
             updateOrderPayment();
+        } else {
+            let myNumber = 0;
+            localStorage.setItem('numberOfItems', myNumber.toString());
+            localStorage.removeItem("cart_id");
         }
     }
 }

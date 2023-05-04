@@ -408,6 +408,7 @@ function renderCartItemsNumber(res){
     renderCartNumber();
 }
 
+// =============================== BUY NOW ===============================
 async function buyNow() {
     await addToCart();
     await redirectToCheckout();
