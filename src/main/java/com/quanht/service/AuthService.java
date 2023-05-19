@@ -138,7 +138,7 @@ public class AuthService {
             }
             Optional<Account> account = accountRepository.findByEmail(request.getEmail());
 
-            if (account.isPresent() && passwordEncoder.matches(account.get().getPassword(), request.getPassword())) {
+            if (account.isPresent() && passwordEncoder.matches(request.getPassword(), account.get().getPassword())) {
                 throw new BadRequestException("Tài khoản của bạn chưa được xác thực");
             }
             throw new BadRequestException("Email hoặc mật khẩu không chính xác");
